@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 232469259
   m_SortingLayer: 2
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: -5281422124547630143, guid: fc8ff5fa12b213e49a51c4cec1950ce6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -142,5 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d65ee071861b341a09d0520d64e603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 0}
   chestAnimator: {fileID: 7356693795599468006}
+  interactableSO: {fileID: 11400000, guid: 815941a7a14445243a6db6b47d532528, type: 2}
+  itemsGO:
+  - {fileID: 7851243456184710361, guid: 617a675409c705843990200488ea91ea, type: 3}
+  - {fileID: 2639293457558085187, guid: 19fe8ab068fed944d9eaa2469929db99, type: 3}
+  pickupsGO:
+  - {fileID: 6366449573425277758, guid: a09b6a6a225130447a4b5d8ba5d2959e, type: 3}
+  - {fileID: 4100348873515282918, guid: 764662cc32302024b8767c51fbb601bd, type: 3}

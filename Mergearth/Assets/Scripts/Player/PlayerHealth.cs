@@ -8,8 +8,6 @@ public class PlayerHealth : MonoBehaviour
     public static PlayerHealth SharedInstance;
 
     //Variables to display health
-    private int currentHealth;
-    [SerializeField] private int maxHealth;
     [SerializeField] private SpriteRenderer playerSR;
     [SerializeField] private float flashSpeed;
     [SerializeField] private float invincibilityDurationAfterHit;
@@ -47,26 +45,8 @@ public class PlayerHealth : MonoBehaviour
         //Set current health to max health if we do not load data
         if (!LoadScene.SharedInstance.GetDataToLoad())
         {
-            SetHealth(maxHealth);
+            PlayerStats.SharedInstance.SetPlayerHealth(Constants.PLAYERMAXHEALTH);
         }
-    }
-    #endregion
-
-    #region Getters & Setters
-    public int GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
-    public int GetCurrentHealth()
-    {
-        return currentHealth;
-    }
-
-    public void SetHealth(int health)
-    {
-        currentHealth = health;
-        HealthBar.SharedInstance.SetHealth(currentHealth);
     }
     #endregion
 
@@ -84,13 +64,10 @@ public class PlayerHealth : MonoBehaviour
             AudioManager.SharedInstance.PlaySoundEffect(soundEffect);
 
             //The player's health is reduced if he is not invincible and his life is > 0
-            currentHealth = Mathf.Max(Constants.MINHEALTHPLAYER, currentHealth - damage);
-
-            //Display health
-            HealthBar.SharedInstance.SetHealth(currentHealth);
+            PlayerStats.SharedInstance.SetPlayerHealth(Mathf.Max(Constants.PLAYERMINHEALTH, PlayerStats.SharedInstance.GetPlayerHealth() - damage));
 
             //If the health is at the minimum, the player is dead
-            if (currentHealth == Constants.MINHEALTHPLAYER)
+            if (PlayerStats.SharedInstance.GetPlayerHealth() == Constants.PLAYERMINHEALTH)
             {
                 Death();
                 return;
@@ -104,10 +81,7 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(int heal)
     {
         //The player's health is increased if his life is not max
-        currentHealth = Mathf.Min(maxHealth, currentHealth + heal);
-
-        //Display health
-        HealthBar.SharedInstance.SetHealth(currentHealth);
+        PlayerStats.SharedInstance.SetPlayerHealth(Mathf.Min(Constants.PLAYERMAXHEALTH, PlayerStats.SharedInstance.GetPlayerHealth() + heal));
     }
 
     private void Death()
@@ -118,7 +92,7 @@ public class PlayerHealth : MonoBehaviour
     public void Respawn()
     {
         //Get current health back to max
-        SetHealth(maxHealth);
+        PlayerStats.SharedInstance.SetPlayerHealth(Constants.PLAYERMAXHEALTH);
     }
     #endregion
 

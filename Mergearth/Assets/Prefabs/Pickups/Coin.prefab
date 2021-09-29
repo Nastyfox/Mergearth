@@ -132,4 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d4a2878f7c3a145a8e485417c4b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 8300000, guid: db03c078ced3a124790bd69a7a4a1736, type: 3}
+  itemSO: {fileID: 0}
+  pickupSO: {fileID: 11400000, guid: b1279cd7cb689dd4597508f2830ffa92, type: 2}

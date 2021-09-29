@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f3ca330cc47bd43b1603b0dfeba344, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  interactableId: 0
+  soundEffect: {fileID: 8300000, guid: 621c31ebf299fcf4dbf55841874aecc1, type: 3}
+  possibleItems:
+  - {fileID: 11400000, guid: 2cf31bab3af318240be491d3edae3fd5, type: 2}
+  - {fileID: 11400000, guid: d5a3c2e61d9385c45baf51bc941a82e7, type: 2}
+  maxItemsNumber: 0
+  minItemsNumber: 2
+  possiblePickups:
+  - {fileID: 11400000, guid: b1279cd7cb689dd4597508f2830ffa92, type: 2}
+  - {fileID: 11400000, guid: 60da53b51575e0c4db2293ba9e0811a1, type: 2}
+  maxPickupsNumber: 1
+  minPickupsNumber: 5

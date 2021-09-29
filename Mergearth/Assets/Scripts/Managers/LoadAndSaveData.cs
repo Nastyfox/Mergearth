@@ -47,7 +47,7 @@ public class LoadAndSaveData : MonoBehaviour
     public void GetDatasToSave()
     {
         //Save current health as health
-        playerHealth = PlayerHealth.SharedInstance.GetCurrentHealth();
+        playerHealth = PlayerStats.SharedInstance.GetPlayerHealth();
 
         //Save current number of coins
         coinsCount = Inventory.SharedInstance.GetCoinCount();
@@ -125,7 +125,7 @@ public class LoadAndSaveData : MonoBehaviour
             }
 
             //Set current health to saved health
-            PlayerHealth.SharedInstance.SetHealth(playerHealth);
+            PlayerStats.SharedInstance.SetPlayerHealth(playerHealth);
 
             //Set coin count to saved coin count
             Inventory.SharedInstance.SetCoinCount(coinsCount);
@@ -140,7 +140,7 @@ public class LoadAndSaveData : MonoBehaviour
         else
         {
             //Set player health to max health
-            PlayerHealth.SharedInstance.SetHealth(PlayerHealth.SharedInstance.GetMaxHealth());
+            PlayerStats.SharedInstance.SetPlayerHealth(Constants.PLAYERMAXHEALTH);
 
             //Set coins count to 0
             Inventory.SharedInstance.SetCoinCount(0);

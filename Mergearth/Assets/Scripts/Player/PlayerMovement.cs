@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement SharedInstance;
 
     //Variables for movement
-    [SerializeField] private float moveSpeed;
     [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private float smoothTime = 0.05f;
     private Vector3 velocity;
@@ -48,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Get horizontal movement based on input
-        horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed;
+        horizontalMovement = Input.GetAxis("Horizontal") * PlayerStats.SharedInstance.GetPlayerMoveSpeed();
 
         //Get vertical movement based on input
         verticalMovement = Input.GetAxis("Vertical") * climbSpeed;
@@ -135,12 +134,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void IncreaseSpeedByPercentage(float percentage)
     {
-        moveSpeed *= (1 + percentage / 100);
+        PlayerStats.SharedInstance.SetPlayerMoveSpeed(PlayerStats.SharedInstance.GetPlayerMoveSpeed() * (1 + percentage / 100));
     }
 
     public void DecreaseSpeedByPercentage(float percentage)
     {
-        moveSpeed /= (1 + percentage / 100);
+        PlayerStats.SharedInstance.SetPlayerMoveSpeed(PlayerStats.SharedInstance.GetPlayerMoveSpeed() / (1 + percentage / 100));
     }
 
     private void FlipSprite(Vector3 velocity)

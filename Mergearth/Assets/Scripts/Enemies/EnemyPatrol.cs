@@ -12,6 +12,9 @@ public class EnemyPatrol : MonoBehaviour
     //Variables for animation
     [SerializeField] private SpriteRenderer enemySR;
 
+    //Variables for enemy stats
+    [SerializeField] private EnemySO enemySO;
+
     #endregion
 
     #region UnityMethods
@@ -38,7 +41,11 @@ public class EnemyPatrol : MonoBehaviour
         //If the player walks on the head of enemy, destroy it
         if(collision.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
+            enemySO.enemyHP -= PlayerStats.SharedInstance.GetPlayerDamage();
+            if(enemySO.enemyHP <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -47,7 +54,7 @@ public class EnemyPatrol : MonoBehaviour
         //Do damages to the player
         if(collision.gameObject.CompareTag("Player"))
         {
-            PlayerHealth.SharedInstance.TakeDamage(Constants.SNAKEDAMAGE);
+            PlayerHealth.SharedInstance.TakeDamage(enemySO.enemyDamage);
         }
     }
 

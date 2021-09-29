@@ -4,15 +4,17 @@ using TMPro;
 public class PropInteractable : MonoBehaviour
 {
     #region Variables
-    //Variables for audio playing
-    [SerializeField] private AudioClip soundEffect;
-
     //Variables for interactable objects
     private TMP_Text interactionText;
 
     //Variables for chest opening
     private bool chestInRange;
     [SerializeField] private Animator chestAnimator;
+    private int itemsNumber;
+    private int pickupsNumber;
+    [SerializeField] InteractableSO interactableSO;
+    [SerializeField] GameObject[] itemsGO;
+    [SerializeField] GameObject[] pickupsGO;
 
     //Variables for NPC talking
     private bool NPCInRange;
@@ -31,6 +33,13 @@ public class PropInteractable : MonoBehaviour
             {
                 //Play animation
                 chestAnimator.SetTrigger("OpenChest");
+                //Play sound effect
+                AudioManager.SharedInstance.PlaySoundEffect(interactableSO.soundEffect);
+
+                //Spawn items from chest
+                SpawnChestContent();
+
+
                 //Deactivate box collider after opening it to avoid multiple openings
                 this.GetComponent<BoxCollider2D>().enabled = false;
             }
@@ -48,6 +57,33 @@ public class PropInteractable : MonoBehaviour
         //Get the interaction text and deactivate it
         interactionText = GameObject.FindGameObjectWithTag("InteractionText").GetComponent<TMP_Text>();
         interactionText.enabled = false;
+    }
+    #endregion
+
+    #region Methods
+    private void SpawnChestContent()
+    {
+        //Set a random number of item
+        itemsNumber = Random.Range(interactableSO.minItemsNumber, interactableSO.maxItemsNumber);
+
+        for (int i = 0; i < itemsNumber; i++)
+        {
+            //Add a random item based on possible ones
+            int itemType = Random.Range(0, interactableSO.possibleItems.Length);
+            //Instantiate new item
+            GameObject item = Instantiate(itemsGO[itemType]);
+        }
+
+        //Set a random number of pickups
+        pickupsNumber = Random.Range(interactableSO.minItemsNumber, interactableSO.maxItemsNumber);
+
+        for (int i = 0; i < pickupsNumber; i++)
+        {
+            //Add a random pickup based on possible ones
+            int pickupType = Random.Range(0, interactableSO.possiblePickups.Length);
+            //Instantiate new item
+            GameObject pickup = Instantiate(pickupsGO[pickupType]);
+        }
     }
     #endregion
 
