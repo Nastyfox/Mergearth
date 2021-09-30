@@ -9,6 +9,9 @@ public class GameOverMenu : MonoBehaviour
 
     //Variable to activate or deactivate game over UI
     private Canvas canvasObject;
+
+    //Variables for navigation between buttons
+    [SerializeField] private GameObject gameOverFirstButton;
     #endregion
 
     #region UnityMethods
@@ -59,6 +62,9 @@ public class GameOverMenu : MonoBehaviour
 
         //Avoid pause ui to display over game over ui
         PauseMenu.SharedInstance.enabled = false;
+
+        //Set first button of pause menu as selected
+        SettingsMenu.SharedInstance.EventSystemSelectedElement(gameOverFirstButton);
     }
     #endregion
 }

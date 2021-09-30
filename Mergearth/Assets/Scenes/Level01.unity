@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4857472824131818909, guid: 1b061665657007641811d20c56a45002, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5545000541318130575, guid: 1b061665657007641811d20c56a45002, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -921,6 +925,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886265075211029139, guid: 4fd064117c327e0418dee6964edd4110, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2016155588}
+    - target: {fileID: 886265075211029139, guid: 4fd064117c327e0418dee6964edd4110, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettingsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 886265075211029139, guid: 4fd064117c327e0418dee6964edd4110, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 949702270830059562, guid: 4fd064117c327e0418dee6964edd4110, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -943,6 +959,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd064117c327e0418dee6964edd4110, type: 3}
+--- !u!114 &2016155588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6142276681010208869, guid: 4fd064117c327e0418dee6964edd4110, type: 3}
+  m_PrefabInstance: {fileID: 2016155587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0b59d0231ec2449853225d2f9a3976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &541357180729131608
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -32,9 +33,6 @@ public class SettingsMenu : MonoBehaviour
     private float masterVolume;
     private float musicVolume;
     private float soundEffectsVolume;
-
-    //Variables for UI
-    [SerializeField] private GameObject settingsUI;
     #endregion
 
     #region UnityMethods
@@ -62,25 +60,10 @@ public class SettingsMenu : MonoBehaviour
         musicVolumeSlider.value = LogValueToSlider(volume);
         mixer.GetFloat("SoundEffectsVolume", out volume);
         soundEffectsVolumeSlider.value = LogValueToSlider(volume);
-
-        //Close settings panel to show main menu first
-        CloseSettingsPanel();
     }
     #endregion
 
     #region Methods
-    public void CloseSettingsPanel()
-    {
-        //Disable settings ui
-        settingsUI.SetActive(false);
-    }
-
-    public void OpenSettingsPanel()
-    {
-        //Enable settings ui
-        settingsUI.SetActive(true);
-    }
-
     public void ApplySettingsButton()
     {
         //Set volumes
@@ -94,9 +77,6 @@ public class SettingsMenu : MonoBehaviour
 
         //Save settings
         SaveSettings();
-
-        //Close panel after applying them
-        CloseSettingsPanel();
     }
 
     public void SetResolutionDropdown(Resolution[] resolutions)
@@ -208,6 +188,14 @@ public class SettingsMenu : MonoBehaviour
     private float LogValueToSlider(float volume)
     {
         return Mathf.Pow(10, volume / 20);
+    }
+
+    public void EventSystemSelectedElement(GameObject go)
+    {
+        //Clear event system
+        EventSystem.current.SetSelectedGameObject(null);
+        //Set selected gameobject
+        EventSystem.current.SetSelectedGameObject(go);
     }
     #endregion
 }

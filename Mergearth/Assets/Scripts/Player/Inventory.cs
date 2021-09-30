@@ -141,6 +141,11 @@ public class Inventory : MonoBehaviour
         string spriteLocation = "Images/" + itemSO.item.itemSpriteName;
         itemButton.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(spriteLocation);
 
+        //If it's the first item, set it as selected
+        if(inventoryItems.Count == 0)
+        {
+            SettingsMenu.SharedInstance.EventSystemSelectedElement(itemButton);
+        }
         //Add item to the list
         inventoryItems.Add(itemSO);
     }

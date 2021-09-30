@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class PauseMenu : MonoBehaviour
 
     //Variables to activate or deactivate pause UI
     private Canvas canvasObject;
+    [SerializeField] private GameObject settingsUI;
+
+    //Variables for navigation between buttons
+    [SerializeField] private GameObject pauseFirstButton, settingsFirstButton, closedSettingsFirstButton;
     #endregion
 
     #region UnityMethods
@@ -22,6 +27,9 @@ public class PauseMenu : MonoBehaviour
         //Get the canvas and deactivate it
         canvasObject = this.GetComponent<Canvas>();
         canvasObject.enabled = false;
+
+        //Close other panels at start
+        CloseSettingsPanel();
     }
 
     // Update is called once per frame
@@ -74,6 +82,9 @@ public class PauseMenu : MonoBehaviour
 
         //Say that game is paused
         gameIsPaused = true;
+
+        //Set first button of pause menu as selected
+        SettingsMenu.SharedInstance.EventSystemSelectedElement(pauseFirstButton);
     }
 
     public void ResumeGame()
@@ -108,6 +119,24 @@ public class PauseMenu : MonoBehaviour
 
         //Display saved text
         savedText.enabled = true;
+    }
+
+    public void CloseSettingsPanel()
+    {
+        //Close settings panel
+        settingsUI.SetActive(false);
+
+        //Set settings button active
+        SettingsMenu.SharedInstance.EventSystemSelectedElement(closedSettingsFirstButton);
+    }
+
+    public void OpenSettingsPanel()
+    {
+        //Open settings panel
+        settingsUI.SetActive(true);
+
+        //Set first button of settings active
+        SettingsMenu.SharedInstance.EventSystemSelectedElement(settingsFirstButton);
     }
     #endregion
 }

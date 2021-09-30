@@ -67,11 +67,11 @@ public class ShopManager : MonoBehaviour
         {
             //Add a random item based on possible ones
             int itemType = Random.Range(0, possibleItems.Length);
-            AddItem(possibleItems[itemType]);
+            AddItem(possibleItems[itemType], i);
         }
     }
 
-    private void AddItem(ItemSO itemSO)
+    private void AddItem(ItemSO itemSO, int itemNumber)
     {
         //Instantiate new button for item
         GameObject itemButton = Instantiate(prefabItemButton, itemsContainer.transform);
@@ -84,6 +84,12 @@ public class ShopManager : MonoBehaviour
 
         //Add price for the item
         itemButton.transform.GetChild(1).GetComponent<TMP_Text>().text = itemSO.item.itemPrice.ToString();
+
+        //If it's the first item, set it as selected
+        if(itemNumber == 0)
+        {
+            SettingsMenu.SharedInstance.EventSystemSelectedElement(itemButton);
+        }
     }
 
     public void BuyItem(ItemSO itemSO, GameObject itemButton)
