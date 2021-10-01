@@ -21,17 +21,6 @@ public class PauseMenu : MonoBehaviour
     #endregion
 
     #region UnityMethods
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Get the canvas and deactivate it
-        canvasObject = this.GetComponent<Canvas>();
-        canvasObject.enabled = false;
-
-        //Close other panels at start
-        CloseSettingsPanel();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -60,6 +49,13 @@ public class PauseMenu : MonoBehaviour
 
         //Disable text at start
         savedText.enabled = false;
+
+        //Get the canvas and deactivate it
+        canvasObject = this.GetComponent<Canvas>();
+        canvasObject.enabled = false;
+
+        //Close other panels at start
+        CloseSettingsPanel();
     }
     #endregion
 

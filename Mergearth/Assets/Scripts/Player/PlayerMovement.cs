@@ -16,8 +16,11 @@ public class PlayerMovement : MonoBehaviour
 
     //Variables for jump
     private bool isJumping = false;
+    private bool holdingJump = false;
     private bool isGrounded;
     [SerializeField] private float verticalJumpForce;
+    [SerializeField] private float fallMultiplier;
+    [SerializeField] private float lowJumpMultiplier;
 
     //Variables for animation
     [SerializeField] private Animator playerAnim;
@@ -56,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             isJumping = true;
+            holdingJump = true;
         }
 
         if (!isJumping)
@@ -69,14 +73,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = false;
             isClimbing = true;
+        }
 
-            SetPlayerMiddleLadder();
-
-            //Get all platforms in level and make them crossable
-            foreach(var element in GameObject.FindGameObjectsWithTag("Platform"))
-            {
-                element.GetComponent<PlatformCollider>().MakePlatformCrossable();
-            }
+        if(!Input.GetButton("Jump"))
+        {
+            holdingJump = false;
         }
 
         //Set parameters for animation
@@ -91,6 +92,20 @@ public class PlayerMovement : MonoBehaviour
     {
         //Move the player using physics
         MovePlayer(horizontalMovement * Time.fixedDeltaTime, verticalMovement * Time.fixedDeltaTime);
+
+        if(isJumping)
+        {
+            //If the player is falling after a jump, increase gravity to make it faster
+            if (playerRb.velocity.y < 0)
+            {
+                playerRb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.fixedDeltaTime;
+            }
+            //If the player is jumping but released the jump button, make a small jump
+            else if(playerRb.velocity.y > 0 && !holdingJump)
+            {
+                playerRb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.fixedDeltaTime;
+            }
+        }
     }
 
     #endregion
@@ -216,12 +231,6 @@ public class PlayerMovement : MonoBehaviour
         {
             closeLadder = false;
             isClimbing = false;
-        }
-
-        //Detect that player crossed platform and make it uncrossable
-        else if (collision.CompareTag("Platform"))
-        {
-            collision.GetComponent<PlatformCollider>().MakePlatformUncrossable();
         }
     }
     #endregion

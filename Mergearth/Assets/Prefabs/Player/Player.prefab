@@ -170,6 +170,8 @@ MonoBehaviour:
   playerRb: {fileID: 6232471725802043728}
   smoothTime: 0.05
   verticalJumpForce: 200
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 1.5
   playerAnim: {fileID: 6232471725802043732}
   playerSR: {fileID: 6232471725802043730}
   climbSpeed: 150
