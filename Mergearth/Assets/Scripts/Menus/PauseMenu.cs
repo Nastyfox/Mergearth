@@ -13,32 +13,39 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private TMP_Text savedText;
 
     //Variables to activate or deactivate pause UI
-    private Canvas canvasObject;
+    [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject settingsUI;
 
     //Variables for navigation between buttons
     [SerializeField] private GameObject pauseFirstButton, settingsFirstButton, closedSettingsFirstButton;
+
+    //Variables for controls
+    private PlayerActions controls;
+    private bool pauseInputTriggered;
     #endregion
 
     #region UnityMethods
     // Update is called once per frame
     void Update()
     {
-        //If the player press escape, pause or unpause the game
-        if(Input.GetKeyDown(KeyCode.Escape))
+        //If the player presses the pause input, invert pause mode
+        if(pauseInputTriggered)
         {
-            if(!gameIsPaused)
+            //Pause or unpause the game
+            if (!gameIsPaused)
             {
                 //Activate pause UI
-                canvasObject.enabled = true;
                 PauseGame();
+                gameIsPaused = true;
             }
             else
             {
                 //Deactivate pause UI
-                canvasObject.enabled = false;
                 ResumeGame();
+                gameIsPaused = false;
             }
+
+            pauseInputTriggered = false;
         }
     }
 
@@ -50,12 +57,26 @@ public class PauseMenu : MonoBehaviour
         //Disable text at start
         savedText.enabled = false;
 
-        //Get the canvas and deactivate it
-        canvasObject = this.GetComponent<Canvas>();
-        canvasObject.enabled = false;
+        //Deactivate UI
+        pauseUI.SetActive(false);
 
         //Close other panels at start
         CloseSettingsPanel();
+
+        //Get all controls
+        controls = new PlayerActions();
+
+        //Open or close pause menu based on previous state
+        controls.UIControl.Pause.performed += ctx => PauseInputTriggered();
+    }
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
     #endregion
 
@@ -69,15 +90,15 @@ public class PauseMenu : MonoBehaviour
     #region Methods
     public void PauseGame()
     {
+        //Activate UI
+        pauseUI.SetActive(true);
+
         //Stop every movement and stop time
         PlayerMovement.SharedInstance.enabled = false;
         Time.timeScale = Constants.STOPPEDTIMESCALE;
 
         //Pause the music
         AudioManager.SharedInstance.PauseAudioSource();
-
-        //Say that game is paused
-        gameIsPaused = true;
 
         //Set first button of pause menu as selected
         SettingsMenu.SharedInstance.EventSystemSelectedElement(pauseFirstButton);
@@ -93,8 +114,7 @@ public class PauseMenu : MonoBehaviour
         AudioManager.SharedInstance.ResumeAudioSource();
 
         //Say that game is unpaused
-        gameIsPaused = false;
-        canvasObject.enabled = false;
+        pauseUI.SetActive(false);
     }
 
     public void MainMenuButton()
@@ -133,6 +153,13 @@ public class PauseMenu : MonoBehaviour
 
         //Set first button of settings active
         SettingsMenu.SharedInstance.EventSystemSelectedElement(settingsFirstButton);
+    }
+    #endregion
+
+    #region InputMethods
+    private void PauseInputTriggered()
+    {
+        pauseInputTriggered = true;
     }
     #endregion
 }

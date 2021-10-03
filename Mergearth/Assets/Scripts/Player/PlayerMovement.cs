@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,14 +12,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private float smoothTime = 0.05f;
     private Vector3 velocity;
-    private float horizontalMovement;
     private float playerSpeed;
+    private float horizontalMovement;
+    private float verticalMovement;
 
     //Variables for jump
     private bool isJumping = false;
     private bool holdingJump = false;
     private bool isGrounded;
-    [SerializeField] private float verticalJumpForce;
     [SerializeField] private float fallMultiplier;
     [SerializeField] private float lowJumpMultiplier;
 
@@ -28,14 +29,17 @@ public class PlayerMovement : MonoBehaviour
 
     //Variables for ladders
     private bool closeLadder;
-    private float verticalMovement;
     private bool isClimbing;
-    [SerializeField] private float climbSpeed;
     private float ladderCenterX;
+
+    //Variables for interaction
+    private bool isInteracting;
+
+    //Variables for controls
+    private PlayerActions controls;
 
     //Variables for collider
     [SerializeField] private BoxCollider2D playerBC;
-
     #endregion
 
     #region UnityMethods
@@ -44,24 +48,25 @@ public class PlayerMovement : MonoBehaviour
     {
         //Get the instance for player health
         SharedInstance = this;
+
+        //Get all controls
+        controls = new PlayerActions();
+        
+        //Move or stop movement based on input value
+        controls.PlayerControl.Move.performed += ctx => OnMovement(ctx);
+        controls.PlayerControl.Move.canceled += ctx => StopMovement();
+
+        //Make a small or big jump when input is pressed
+        controls.PlayerControl.Jump.started += ctx => OnJump();
+        controls.PlayerControl.Jump.canceled += ctx => StopJump();
+
+        //Set interactions with props
+        controls.PlayerControl.Interact.performed += ctx => OnInteract();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Get horizontal movement based on input
-        horizontalMovement = Input.GetAxis("Horizontal") * PlayerStats.SharedInstance.GetPlayerMoveSpeed();
-
-        //Get vertical movement based on input
-        verticalMovement = Input.GetAxis("Vertical") * climbSpeed;
-
-        //Jump if spacebar is pressed and if the player is on the ground 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            isJumping = true;
-            holdingJump = true;
-        }
-
         if (!isJumping)
         {
             //Get player speed based on velocity
@@ -69,15 +74,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //If player is close to a ladder and try to use arrows, set climbing to true and make platform collider crossable
-        if(closeLadder && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
+        if(closeLadder && verticalMovement != 0)
         {
             isJumping = false;
             isClimbing = true;
         }
-
-        if(!Input.GetButton("Jump"))
+        //If the player is grounded and he is not moving up, he is not climbing
+        else if(closeLadder && isGrounded && verticalMovement <= 0)
         {
-            holdingJump = false;
+            isClimbing = false;
         }
 
         //Set parameters for animation
@@ -108,12 +113,35 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        controls.PlayerControl.Enable();
+    }
+    private void OnDisable()
+    {
+        controls.PlayerControl.Disable();
+    }
     #endregion
 
     #region Getters & Setters
     public bool GetIsClimbing()
     {
         return isClimbing;
+    }
+
+    public float GetVerticalMovement()
+    {
+        return verticalMovement;
+    }
+
+    public bool GetIsInteracting()
+    {
+        return isInteracting;
+    }
+
+    public void SetIsInteracting(bool value)
+    {
+        isInteracting = value;
     }
     #endregion
 
@@ -130,6 +158,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //Put player in the middle of the ladder
+            SetPlayerMiddleLadder();
+
             //Create target velocity and add it to the player for horizontal movement
             Vector3 targetVerticalVelocity = new Vector2(0, verticalMovement);
             playerRb.velocity = Vector3.SmoothDamp(playerRb.velocity, targetVerticalVelocity, ref velocity, smoothTime);
@@ -139,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
         //Add force for the jump
         if (isJumping && isGrounded)
         {
-            playerRb.AddForce(new Vector2(0.0f, verticalJumpForce));
+            playerRb.AddForce(new Vector2(0.0f, PlayerStats.SharedInstance.GetPlayerJumpForce()));
         }
     }
     private void SetPlayerMiddleLadder()
@@ -185,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
     public void ActivatePlayerInteractions()
     {
         //Restart player movement
-        PlayerMovement.SharedInstance.enabled = true;
+        SharedInstance.enabled = true;
 
         //Enable collisions with other elements
         playerRb.bodyType = RigidbodyType2D.Dynamic;
@@ -201,7 +232,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             isJumping = false;
-            isClimbing = false;
         }
     }
 
@@ -232,6 +262,47 @@ public class PlayerMovement : MonoBehaviour
             closeLadder = false;
             isClimbing = false;
         }
+    }
+    #endregion
+
+    #region InputMethods
+    public void OnMovement(InputAction.CallbackContext value)
+    {
+        Vector2 rawInputMovement = value.ReadValue<Vector2>();
+
+        //Get horizontal movement based on input
+        horizontalMovement = rawInputMovement.x * PlayerStats.SharedInstance.GetPlayerMoveSpeed();
+
+        //Get vertical movement based on input
+        verticalMovement = rawInputMovement.y * PlayerStats.SharedInstance.GetPlayerClimbSpeed();
+    }
+
+    private void StopMovement()
+    {
+        //Stop all movements
+        horizontalMovement = 0;
+        verticalMovement = 0;
+    }
+
+    private void OnJump()
+    {
+        //Jump if the player is on the ground && jump button has been pressed
+        if (isGrounded)
+        {
+            isJumping = true;
+            holdingJump = true;
+        }
+    }
+
+    private void StopJump()
+    {
+        //If the button is released, make a small jump
+        holdingJump = false;
+    }
+
+    private void OnInteract()
+    {
+        isInteracting = true;
     }
     #endregion
 }

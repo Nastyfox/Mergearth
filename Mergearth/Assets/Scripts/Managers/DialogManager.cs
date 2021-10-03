@@ -19,6 +19,10 @@ public class DialogManager : MonoBehaviour
     //Variables to browse sentences
     private int sentenceNumber;
     private bool dialogStarted;
+
+    //Variables for controls
+    private PlayerActions controls;
+    private bool launchNextSentence;
     #endregion
 
     #region UnityMethods
@@ -30,15 +34,37 @@ public class DialogManager : MonoBehaviour
         //Set the first sentence and dialog not started
         sentenceNumber = 0;
         dialogStarted = false;
+
+        //Get all controls
+        controls = new PlayerActions();
+
+        //Controls for dialog
+        controls.UIControl.Dialog.performed += ctx => TriggerDialog();
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        //If player press E, go to the next sentence
-        if (dialogStarted && Input.GetKeyDown(KeyCode.E))
+        //If player press input, go to the next sentence
+        if (dialogStarted && launchNextSentence && !ShopManager.SharedInstance.GetIsShopOpen())
         {
             NextSentence();
+            launchNextSentence = false;
+        }
+        //If player press input and shop is open, close it
+        else if(launchNextSentence && ShopManager.SharedInstance.GetIsShopOpen())
+        {
+            ShopManager.SharedInstance.CloseShop();
         }
     }
     #endregion
@@ -137,6 +163,13 @@ public class DialogManager : MonoBehaviour
     {
         yield return null;
         dialogStarted = true;
+    }
+    #endregion
+
+    #region InputMethods
+    private void TriggerDialog()
+    {
+        launchNextSentence = true;
     }
     #endregion
 }

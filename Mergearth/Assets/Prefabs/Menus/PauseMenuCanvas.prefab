@@ -538,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedText: {fileID: 4730899777137321417}
+  pauseUI: {fileID: 391381153590816665}
   settingsUI: {fileID: 2449396160027256168}
   pauseFirstButton: {fileID: 391381152828964446}
   settingsFirstButton: {fileID: 837979843715498560}

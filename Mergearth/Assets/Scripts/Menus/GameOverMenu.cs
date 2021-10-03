@@ -8,7 +8,7 @@ public class GameOverMenu : MonoBehaviour
     public static GameOverMenu SharedInstance;
 
     //Variable to activate or deactivate game over UI
-    private Canvas canvasObject;
+    [SerializeField] private GameObject gameOverUI;
 
     //Variables for navigation between buttons
     [SerializeField] private GameObject gameOverFirstButton;
@@ -20,9 +20,8 @@ public class GameOverMenu : MonoBehaviour
         //Get the instance for health bar
         SharedInstance = this;
 
-        //Deactivate the canvas at first
-        canvasObject = this.GetComponent<Canvas>();
-        canvasObject.enabled = false;
+        //Deactivate UI at first
+        gameOverUI.SetActive(false);
     }
     #endregion
 
@@ -33,7 +32,7 @@ public class GameOverMenu : MonoBehaviour
         StartCoroutine(LoadScene.SharedInstance.LoadSceneByName(SceneManager.GetActiveScene().name, LoadScene.SharedInstance.GetLevelUnlocked(), true, false));
 
         //Deactivate gameover UI
-        canvasObject.enabled = false;
+        gameOverUI.SetActive(false);
 
         //Reactivate pause menu
         PauseMenu.SharedInstance.enabled = true;
@@ -58,7 +57,7 @@ public class GameOverMenu : MonoBehaviour
     public void GameOverUI()
     {
         //Display game over UI
-        canvasObject.enabled = true;
+        gameOverUI.SetActive(true);
 
         //Avoid pause ui to display over game over ui
         PauseMenu.SharedInstance.enabled = false;

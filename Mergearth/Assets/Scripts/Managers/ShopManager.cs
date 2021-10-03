@@ -34,21 +34,17 @@ public class ShopManager : MonoBehaviour
         //Disable shop UI for the moment
         shopPanel.SetActive(false);
     }
-
-    private void Update()
-    {
-        //If the player press E when the shop is open, close it
-        if(Input.GetKeyDown(KeyCode.E) && isShopOpen)
-        {
-            CloseShop();
-        }
-    }
     #endregion
 
     #region Getters & Setters
     public bool GetShopHasBeenOpenened()
     {
         return shopHasBeenOpened;
+    }
+
+    public bool GetIsShopOpen()
+    {
+        return isShopOpen;
     }
     #endregion
 
@@ -117,7 +113,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void CloseShop()
+    public void CloseShop()
     {
         //Deactivate shop UI
         shopPanel.SetActive(false);

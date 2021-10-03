@@ -22,7 +22,9 @@ public class Constants : MonoBehaviour
     #region Variables Player
     public const int PLAYERMINHEALTH = 0;
     public const int PLAYERMAXHEALTH = 100;
-    public const int BASEPLAYERDAMAGE = 100;
-    public const int BASEPLAYERSPEED = 250;
+    public const int BASEPLAYERDAMAGE = 10;
+    public const float BASEPLAYERMOVESPEED = 250;
+    public const float BASEPLAYERCLIMBSPEED = 150;
+    public const float BASEPLAYERJUMPFORCE = 200;
     #endregion
 }

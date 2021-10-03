@@ -2,27 +2,30 @@ using UnityEngine;
 
 public class Credits : MonoBehaviour
 {
+    #region Variables
+    private PlayerActions controls;
+    #endregion
     #region UnityMethods
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        //Deactivate pause menu and game over menu while on main menu window
-        PauseMenu.SharedInstance.enabled = false;
-        GameOverMenu.SharedInstance.enabled = false;
+        //Get all controls
+        controls = new PlayerActions();
+
+        controls.UIControl.Credits.performed += ctx => EndCredits();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        //If the player hits escape, end credits before the end
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            EndCredits();
-        }
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
     #endregion
 
-    #region Methods
+    #region InputMethods
     public void EndCredits()
     {
         GameOverMenu.SharedInstance.MainMenuButton();

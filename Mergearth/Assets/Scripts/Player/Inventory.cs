@@ -24,6 +24,10 @@ public class Inventory : MonoBehaviour
     private GameObject inventoryPanel;
     [SerializeField] private GameObject itemsContainer;
     [SerializeField] private TMP_Text usedItemText;
+
+    //Variables for controls
+    private PlayerActions controls;
+    private bool inventoryInputTriggered;
     #endregion
 
     #region UnityMethods
@@ -35,6 +39,22 @@ public class Inventory : MonoBehaviour
         //Set variables
         coinCount = 0;
         inventoryItems = new List<ItemSO>();
+
+        //Get all controls
+        controls = new PlayerActions();
+
+        //Open or close inventory based on previous state
+        controls.UIControl.Inventory.performed += ctx => InventoryInputTriggered();
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 
     private void Start()
@@ -48,22 +68,24 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I) && !PauseMenu.SharedInstance.GetGameIsPaused())
+        //If the player pressed the inventory input
+        if(inventoryInputTriggered)
         {
-            if(!inventoryIsOpen)
+            if (!inventoryIsOpen)
             {
                 //Pause game and open inventory
                 PlayerMovement.SharedInstance.DeactivatePlayerInteractions();
-                inventoryIsOpen = true;
                 inventoryPanel.SetActive(true);
+                inventoryIsOpen = true;
             }
             else
             {
                 //Unpause game and close inventory
                 PlayerMovement.SharedInstance.ActivatePlayerInteractions();
-                inventoryIsOpen = false;
                 inventoryPanel.SetActive(false);
+                inventoryIsOpen = false;
             }
+            inventoryInputTriggered = false;
         }
     }
     #endregion
@@ -167,6 +189,17 @@ public class Inventory : MonoBehaviour
         usedItemText.enabled = true;
         yield return new WaitForSeconds(2);
         usedItemText.enabled = false;
+    }
+    #endregion
+
+    #region InputMethods
+    private void InventoryInputTriggered()
+    {
+        //If the game is not paused, open or close inventory
+        if(!PauseMenu.SharedInstance.GetGameIsPaused())
+        {
+            inventoryInputTriggered = true;
+        }
     }
     #endregion
 }

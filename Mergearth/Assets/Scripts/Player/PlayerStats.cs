@@ -9,7 +9,9 @@ public class PlayerStats : MonoBehaviour
 
     private int playerHealth = Constants.PLAYERMAXHEALTH;
     private int playerDamage = Constants.BASEPLAYERDAMAGE;
-    private float playerMoveSpeed = Constants.BASEPLAYERSPEED;
+    private float playerMoveSpeed = Constants.BASEPLAYERMOVESPEED;
+    private float climbSpeed = Constants.BASEPLAYERCLIMBSPEED;
+    private float jumpForce = Constants.BASEPLAYERJUMPFORCE;
     #endregion
 
     #region UnityMethods
@@ -45,6 +47,16 @@ public class PlayerStats : MonoBehaviour
     public void SetPlayerMoveSpeed(float speed)
     {
         playerMoveSpeed = speed;
+    }
+
+    public float GetPlayerClimbSpeed()
+    {
+        return climbSpeed;
+    }
+
+    public float GetPlayerJumpForce()
+    {
+        return jumpForce;
     }
     #endregion
 

@@ -19,6 +19,9 @@ public class PropInteractable : MonoBehaviour
     //Variables for NPC talking
     private bool NPCInRange;
     private DialogSO dialogSO;
+
+    //Variables for Player interaction
+    private PlayerActions controls;
     #endregion
 
     #region UnityMethods
@@ -26,7 +29,7 @@ public class PropInteractable : MonoBehaviour
     void Update()
     {
         //If player press E when he is close to an object he can interact with
-        if (Input.GetKeyDown(KeyCode.E))
+        if (PlayerMovement.SharedInstance.GetIsInteracting())
         {
             //Check if it is a chest and open it
             if (chestInRange)
@@ -49,6 +52,8 @@ public class PropInteractable : MonoBehaviour
                 //Launch dialog and deactivate interaction text
                 DialogManager.SharedInstance.StartDialog(dialogSO);
             }
+
+            PlayerMovement.SharedInstance.SetIsInteracting(false);
         }
     }
 

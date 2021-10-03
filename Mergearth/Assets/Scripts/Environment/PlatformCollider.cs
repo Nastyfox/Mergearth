@@ -16,12 +16,12 @@ public class PlatformCollider : MonoBehaviour
     private void Update()
     {
         //If the player is climbing up, make platform crossable from bottom
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(PlayerMovement.SharedInstance.GetVerticalMovement() > 0)
         {
             platformEffector2D.rotationalOffset = 0;
         }
         //If the player is climbing up, make platform crossable from top
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (PlayerMovement.SharedInstance.GetVerticalMovement() < 0)
         {
             platformEffector2D.rotationalOffset = 180;
         }

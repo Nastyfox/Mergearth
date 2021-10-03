@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b6dffd382c02349ae88d3109a889a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 5628015233290278930}
   gameOverFirstButton: {fileID: 5628015234207090573}
 --- !u!1 &5628015233290278930
 GameObject:
