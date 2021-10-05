@@ -17,6 +17,8 @@ public class Constants : MonoBehaviour
     public const int STOPPEDTIMESCALE = 0;
     public const int NORMALTIMESCALE = 1;
     public const float MINDISTANCETOPOINT = 0.1f;
+    public const float PLATFORMANGLEUP = 0;
+    public const float PLATFORMANGLEDOWN = 180;
     #endregion
 
     #region Variables Player

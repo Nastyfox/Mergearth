@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlatformCollider : MonoBehaviour
 {
     #region Variables
+    //Variable for platform effector
     private PlatformEffector2D platformEffector2D;
     #endregion
 
@@ -16,18 +17,23 @@ public class PlatformCollider : MonoBehaviour
     private void Update()
     {
         //If the player is climbing up, make platform crossable from bottom
-        if(PlayerMovement.SharedInstance.GetVerticalMovement() > 0)
+        if (PlayerMovement.SharedInstance.GetVerticalMovement() > 0)
         {
-            platformEffector2D.rotationalOffset = 0;
+            //Change rotational offset of platform effector if it's not in the right position
+            if (platformEffector2D.rotationalOffset != Constants.PLATFORMANGLEUP)
+            {
+                platformEffector2D.rotationalOffset = Constants.PLATFORMANGLEUP;
+            }
         }
         //If the player is climbing up, make platform crossable from top
-        else if (PlayerMovement.SharedInstance.GetVerticalMovement() < 0)
+        if (PlayerMovement.SharedInstance.GetVerticalMovement() < 0)
         {
-            platformEffector2D.rotationalOffset = 180;
+            //Change rotational offset of platform effector if it's not in the right position
+            if (platformEffector2D.rotationalOffset != Constants.PLATFORMANGLEDOWN)
+            {
+                platformEffector2D.rotationalOffset = Constants.PLATFORMANGLEDOWN;
+            }
         }
     }
-    #endregion
-
-    #region Methods
     #endregion
 }

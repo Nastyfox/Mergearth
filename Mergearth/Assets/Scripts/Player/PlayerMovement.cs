@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public class PlayerMovement : MonoBehaviour
 {
     #region Variables
-    //Variable for instance of the health bar (singleton)
+    //Variable for instance of the player movement (singleton)
     public static PlayerMovement SharedInstance;
 
     //Variables for movement
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //Get the instance for player health
+        //Get the instance for player movement
         SharedInstance = this;
 
         //Get all controls
@@ -152,19 +152,19 @@ public class PlayerMovement : MonoBehaviour
         if (!isClimbing)
         {
             //Create target velocity and add it to the player for horizontal movement
-            Vector3 targetHorizontalVelocity = new Vector2(horizontalMovement, playerRb.velocity.y);
+            Vector3 targetHorizontalVelocity = new Vector3(horizontalMovement, playerRb.velocity.y, 0);
             playerRb.velocity = Vector3.SmoothDamp(playerRb.velocity, targetHorizontalVelocity, ref velocity, smoothTime);
             playerRb.gravityScale = Constants.GRAVITYSCALE;
         }
         else
         {
-            //Put player in the middle of the ladder
-            SetPlayerMiddleLadder();
-
             //Create target velocity and add it to the player for horizontal movement
-            Vector3 targetVerticalVelocity = new Vector2(0, verticalMovement);
+            Vector3 targetVerticalVelocity = new Vector3(0, verticalMovement, 0);
             playerRb.velocity = Vector3.SmoothDamp(playerRb.velocity, targetVerticalVelocity, ref velocity, smoothTime);
             playerRb.gravityScale = 0;
+
+            //Put player in the middle of the ladder
+            SetPlayerMiddleLadder();
         }
 
         //Add force for the jump

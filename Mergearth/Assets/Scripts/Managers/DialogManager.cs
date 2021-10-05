@@ -96,6 +96,9 @@ public class DialogManager : MonoBehaviour
         StartCoroutine(TypeSentence(dialog.NPCSentences[sentenceNumber]));
         sentenceNumber++;
 
+        //Don't display the next sentence immediatly
+        launchNextSentence = false;
+
         //Dialog is started
         StartCoroutine(DialogStarted());
     }
