@@ -8,17 +8,15 @@ public class PropInteractable : MonoBehaviour
     private TMP_Text interactionText;
 
     //Variables for chest opening
-    private bool chestInRange;
-    [SerializeField] private Animator chestAnimator;
-    private int itemsNumber;
-    private int pickupsNumber;
     [SerializeField] InteractableSO interactableSO;
-    [SerializeField] GameObject[] itemsGO;
-    [SerializeField] GameObject[] pickupsGO;
+    private bool interactionDone;
 
-    //Variables for NPC talking
-    private bool NPCInRange;
-    private DialogSO dialogSO;
+    //Variables for controls
+    [SerializeField] private InputReaderSO inputReader = default;
+    private bool isInteracting;
+
+    //Variables for interaction
+    private bool interactableSOInRange;
     #endregion
 
     #region UnityMethods
@@ -26,31 +24,24 @@ public class PropInteractable : MonoBehaviour
     void Update()
     {
         //If player press E when he is close to an object he can interact with
-        if (PlayerMovement.SharedInstance.GetIsInteracting())
+        if (isInteracting)
         {
-            //Check if it is a chest and open it
-            if (chestInRange)
+            if(interactableSOInRange)
             {
-                //Play animation
-                chestAnimator.SetTrigger("OpenChest");
-                //Play sound effect
-                AudioManager.SharedInstance.PlaySoundEffect(interactableSO.soundEffect);
+                //If the prop can be interacted with multiple times or if the interaction is not done yet, interact with it
+                if ((!interactableSO.multipleInteractions && !interactionDone) || interactableSO.multipleInteractions)
+                {
+                    //Set animator component for scriptable object
+                    interactableSO.SetAnimator(this.GetComponent<Animator>());
 
-                //Spawn items from chest
-                SpawnChestContent();
+                    //Interact with the object
+                    interactableSO.Interact();
+                    interactionDone = true;
+                }
 
-
-                //Deactivate box collider after opening it to avoid multiple openings
-                this.GetComponent<BoxCollider2D>().enabled = false;
+                //Interaction is finished
+                isInteracting = false;
             }
-            //If player is in range with NPC and dialog is not started yet
-            else if (NPCInRange && !DialogManager.SharedInstance.GetStartedDialog())
-            {
-                //Launch dialog and deactivate interaction text
-                DialogManager.SharedInstance.StartDialog(dialogSO);
-            }
-
-            PlayerMovement.SharedInstance.SetIsInteracting(false);
         }
     }
 
@@ -60,32 +51,21 @@ public class PropInteractable : MonoBehaviour
         interactionText = GameObject.FindGameObjectWithTag("InteractionText").GetComponent<TMP_Text>();
         interactionText.enabled = false;
     }
-    #endregion
 
-    #region Methods
-    private void SpawnChestContent()
+    private void OnEnable()
     {
-        //Set a random number of item
-        itemsNumber = Random.Range(interactableSO.minItemsNumber, interactableSO.maxItemsNumber);
+        //Add listeners for player controls events invoked by inputreader
 
-        for (int i = 0; i < itemsNumber; i++)
-        {
-            //Add a random item based on possible ones
-            int itemType = Random.Range(0, interactableSO.possibleItems.Length);
-            //Instantiate new item
-            GameObject item = Instantiate(itemsGO[itemType]);
-        }
+        //Set interactions with props
+        inputReader.interactEvent += OnInteract;
+    }
 
-        //Set a random number of pickups
-        pickupsNumber = Random.Range(interactableSO.minItemsNumber, interactableSO.maxItemsNumber);
+    private void OnDisable()
+    {
+        //Remove listeners for player controls events invoked by inputreader
 
-        for (int i = 0; i < pickupsNumber; i++)
-        {
-            //Add a random pickup based on possible ones
-            int pickupType = Random.Range(0, interactableSO.possiblePickups.Length);
-            //Instantiate new item
-            GameObject pickup = Instantiate(pickupsGO[pickupType]);
-        }
+        //Set interactions with props
+        inputReader.interactEvent -= OnInteract;
     }
     #endregion
 
@@ -95,27 +75,11 @@ public class PropInteractable : MonoBehaviour
         //If the player is in contact with interactable prop and if he's not climbing
         if (collision.gameObject.CompareTag("Player") && !PlayerMovement.SharedInstance.GetIsClimbing())
         {
-            if (this.gameObject.CompareTag("Chest"))
-            {
-                //Chest is in range
-                chestInRange = true;
-
-
-                //Object is interactable so display interaction text
-                interactionText.text = Constants.CHESTINTERACTION;
-                interactionText.enabled = true;
-            }
-            else if (this.gameObject.CompareTag("NPC"))
-            {
-                //NPC is in range
-                NPCInRange = true;
-
-                //Object is interactable so display interaction text
-                interactionText.text = Constants.NPCINTERACTION;
-                interactionText.enabled = true;
-
-                dialogSO = NPCDialog.SharedInstance.GetDialog();
-            }
+            //Say that the interactable object is in range
+            interactableSOInRange = true;
+            //Object is interactable so display interaction text
+            interactionText.text = interactableSO.interactionText;
+            interactionText.enabled = true;
         }
     }
 
@@ -124,19 +88,18 @@ public class PropInteractable : MonoBehaviour
         //If the player gets out with pickup that he can interact with
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (this.gameObject.CompareTag("Chest"))
-            {
-                //Chest is not in range anymore so disable interaction text
-                chestInRange = false;
-                interactionText.enabled = false;
-            }
-            else if (this.gameObject.CompareTag("NPC"))
-            {
-                //Chest is not in range anymore so disable interaction text
-                NPCInRange = false;
-                interactionText.enabled = false;
-            }
+            //Say that the interactable object is not in range
+            interactableSOInRange = false;
+            //Disable interaction text
+            interactionText.enabled = false;
         }
+    }
+    #endregion
+
+    #region InputMethods
+    private void OnInteract()
+    {
+        isInteracting = true;
     }
     #endregion
 }

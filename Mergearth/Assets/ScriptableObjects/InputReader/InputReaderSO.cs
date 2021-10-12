@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "InputReader", menuName = "ScriptableObjects/InputReaderSO")]
-public class InputReader : ScriptableObject, PlayerActions.IPlayerControlActions, PlayerActions.IUIControlActions
+[CreateAssetMenu(fileName = "InputReaderSO", menuName = "ScriptableObjects/InputReaderSO")]
+public class InputReaderSO : ScriptableObject, PlayerActions.IPlayerControlActions, PlayerActions.IUIControlActions
 {
 
     #region Variables

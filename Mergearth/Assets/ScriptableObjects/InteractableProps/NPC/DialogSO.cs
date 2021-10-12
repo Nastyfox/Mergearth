@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dialog", menuName = "ScriptableObjects/DialogSO", order = 1)]
-public class DialogSO : ScriptableObject
+public class DialogSO : InteractableSO
 {
     #region Variables
     public string NPCName;
@@ -10,4 +10,10 @@ public class DialogSO : ScriptableObject
 
     public bool isShop;
     #endregion
+
+    public override void Interact()
+    {
+        //Launch dialog and deactivate interaction text
+        DialogManager.SharedInstance.StartDialog(this);
+    }
 }

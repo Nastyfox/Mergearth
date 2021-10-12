@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 229fbb13129102341842783c570b6cdb, type: 3}
-  m_Name: NPC01
+  m_Script: {fileID: 11500000, guid: 249ddcb2d65e35d448c4e4f341c8bd0e, type: 3}
+  m_Name: BasicCoin
   m_EditorClassIdentifier: 
-  NPCName: GUILLAUME
-  NPCSentences:
-  - HELLO, MY NAME IS GUILLAUME
-  - VERY NICE TO MEET YOU
-  - CONTINUE EXPLORING THE WORLD
+  soundEffect: {fileID: 8300000, guid: db03c078ced3a124790bd69a7a4a1736, type: 3}
+  pickupCoinValue: 1

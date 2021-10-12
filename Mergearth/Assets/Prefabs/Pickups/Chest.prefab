@@ -142,11 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d65ee071861b341a09d0520d64e603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestAnimator: {fileID: 7356693795599468006}
-  interactableSO: {fileID: 11400000, guid: 815941a7a14445243a6db6b47d532528, type: 2}
-  itemsGO:
-  - {fileID: 7851243456184710361, guid: 617a675409c705843990200488ea91ea, type: 3}
-  - {fileID: 2639293457558085187, guid: 19fe8ab068fed944d9eaa2469929db99, type: 3}
-  pickupsGO:
-  - {fileID: 6366449573425277758, guid: a09b6a6a225130447a4b5d8ba5d2959e, type: 3}
-  - {fileID: 4100348873515282918, guid: 764662cc32302024b8767c51fbb601bd, type: 3}
+  interactableSO: {fileID: 11400000, guid: a222d9f8a83a55b4d861d7d7f87ab9b9, type: 2}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8057102731393476826}
   - component: {fileID: 8057102731393476823}
   - component: {fileID: -8432116406887060209}
-  - component: {fileID: 5627196684700771008}
   m_Layer: 0
   m_Name: NPCDialog
   m_TagString: NPC
@@ -143,18 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d65ee071861b341a09d0520d64e603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 0}
-  chestAnimator: {fileID: 0}
---- !u!114 &5627196684700771008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8057102731393476827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a1fe055ab9957347a289f701731c23e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialog: {fileID: 11400000, guid: 38a730faa157e98429743805b1c158e6, type: 2}
+  interactableSO: {fileID: 11400000, guid: 38a730faa157e98429743805b1c158e6, type: 2}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}

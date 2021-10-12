@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1858913079033367437}
   - component: {fileID: 1858913079033367424}
   - component: {fileID: 9000339864500424280}
-  - component: {fileID: 4038438263769088407}
   m_Layer: 0
   m_Name: NPCShop
   m_TagString: NPC
@@ -143,18 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d65ee071861b341a09d0520d64e603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffect: {fileID: 0}
-  chestAnimator: {fileID: 0}
---- !u!114 &4038438263769088407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858913079033367436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a1fe055ab9957347a289f701731c23e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialog: {fileID: 11400000, guid: 9cf3a1b8ce2503748b73f075f02d8dc6, type: 2}
+  interactableSO: {fileID: 11400000, guid: 9cf3a1b8ce2503748b73f075f02d8dc6, type: 2}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}

@@ -32,11 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isClimbing;
     private float ladderCenterX;
 
-    //Variables for interaction
-    private bool isInteracting;
-
     //Variables for controls
-    [SerializeField] private InputReader inputReader = default;
+    [SerializeField] private InputReaderSO inputReader = default;
 
     //Variables for collider
     [SerializeField] private BoxCollider2D playerBC;
@@ -109,9 +106,6 @@ public class PlayerMovement : MonoBehaviour
         //Make a small or big jump when input is pressed
         inputReader.jumpEvent += OnJump;
         inputReader.jumpCanceledEvent += StopJump;
-
-        //Set interactions with props
-        inputReader.interactEvent += OnInteract;
     }
     private void OnDisable()
     {
@@ -123,9 +117,6 @@ public class PlayerMovement : MonoBehaviour
         //Make a small or big jump when input is pressed
         inputReader.jumpEvent -= OnJump;
         inputReader.jumpCanceledEvent -= StopJump;
-
-        //Set interactions with props
-        inputReader.interactEvent -= OnInteract;
     }
     #endregion
 
@@ -138,16 +129,6 @@ public class PlayerMovement : MonoBehaviour
     public float GetVerticalMovement()
     {
         return verticalMovement;
-    }
-
-    public bool GetIsInteracting()
-    {
-        return isInteracting;
-    }
-
-    public void SetIsInteracting(bool value)
-    {
-        isInteracting = value;
     }
     #endregion
 
@@ -298,11 +279,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //If the button is released, make a small jump
         holdingJump = false;
-    }
-
-    private void OnInteract()
-    {
-        isInteracting = true;
     }
     #endregion
 }

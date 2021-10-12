@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseFirstButton, settingsFirstButton, closedSettingsFirstButton;
 
     //Variables for controls
-    [SerializeField] private InputReader inputReader = default;
+    [SerializeField] private InputReaderSO inputReader = default;
     private bool pauseInputTriggered;
     #endregion
 

@@ -1,17 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Interactable", menuName = "ScriptableObjects/InteractableSO", order = 3)]
-public class InteractableSO : ScriptableObject
+public abstract class InteractableSO : ScriptableObject
 {
+    #region Variables
+    public bool multipleInteractions;
+    public Animator interactAnimator;
+    public string interactionText;
+    #endregion
 
-	#region Variables
-	public int interactableId;
-	public AudioClip soundEffect;
-	public ItemSO[] possibleItems;
-	public int maxItemsNumber;
-	public int minItemsNumber;
-	public PickupSO[] possiblePickups;
-	public int maxPickupsNumber;
-	public int minPickupsNumber;
-	#endregion
+    #region Methods
+    public abstract void Interact();
+
+
+    public void SetAnimator(Animator animator)
+    {
+        interactAnimator = animator;
+    }
+    #endregion
 }

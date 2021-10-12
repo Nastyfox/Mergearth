@@ -22,7 +22,7 @@ public class ShopManager : MonoBehaviour
     private bool shopHasBeenOpened;
 
     //Variables for controls
-    [SerializeField] private InputReader inputReader = default;
+    [SerializeField] private InputReaderSO inputReader = default;
     #endregion
 
     #region UnityMethods

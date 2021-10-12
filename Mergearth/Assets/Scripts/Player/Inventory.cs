@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text usedItemText;
 
     //Variables for controls
-    [SerializeField] private InputReader inputReader = default;
+    [SerializeField] private InputReaderSO inputReader = default;
     private bool inventoryInputTriggered;
     #endregion
 

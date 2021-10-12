@@ -21,7 +21,7 @@ public class DialogManager : MonoBehaviour
     private bool dialogStarted;
 
     //Variables for controls
-    [SerializeField] private InputReader inputReader = default;
+    [SerializeField] private InputReaderSO inputReader = default;
     private bool launchNextSentence;
     #endregion
 
@@ -82,11 +82,14 @@ public class DialogManager : MonoBehaviour
         //Store dialogSO
         this.dialog = dialogSO;
 
-        //Deactivate player movement when talking to NPC
-        PlayerMovement.SharedInstance.DeactivatePlayerInteractions();
+        //Activate UI controls only
+        inputReader.EnableUIControlInput();
 
         //Start animation for dialog UI
         dialogAnimator.SetBool("isOpen", true);
+
+        //Say that dialog has started
+        dialogStarted = true;
 
         //Set npc name 
         NPCName.text = dialog.NPCName;
@@ -160,12 +163,6 @@ public class DialogManager : MonoBehaviour
             NPCSentence.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
-    }
-
-    private IEnumerator DialogStarted()
-    {
-        yield return null;
-        dialogStarted = true;
     }
     #endregion
 

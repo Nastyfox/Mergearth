@@ -2,11 +2,16 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/ItemSO", order = 2)]
-public class ItemSO : ScriptableObject
+public class ItemSO : PickupSO
 {
     #region Variables
     public Item item;
     #endregion
+
+    public override void Pickup()
+    {
+        Inventory.SharedInstance.AddItem(this);
+    }
 }
 
 [Serializable]

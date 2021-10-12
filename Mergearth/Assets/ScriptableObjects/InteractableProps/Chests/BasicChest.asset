@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2ba00907429094cb19a7f88bfeac3f, type: 3}
+  m_Name: BasicChest
+  m_EditorClassIdentifier: 
+  multipleInteractions: 0
+  interactAnimator: {fileID: 0}
+  interactionText: PRESS E TO OPEN CHEST
+  soundEffect: {fileID: 0}
+  minItemsNumber: 0
+  maxItemsNumber: 2
+  minPickupsNumber: 1
+  maxPickupsNumber: 5
+  possibleItems:
+  - {fileID: 7851243456184710361, guid: 617a675409c705843990200488ea91ea, type: 3}
+  - {fileID: 2639293457558085187, guid: 19fe8ab068fed944d9eaa2469929db99, type: 3}
+  possiblePickups:
+  - {fileID: 6366449573425277758, guid: a09b6a6a225130447a4b5d8ba5d2959e, type: 3}
+  - {fileID: 4100348873515282918, guid: 764662cc32302024b8767c51fbb601bd, type: 3}
