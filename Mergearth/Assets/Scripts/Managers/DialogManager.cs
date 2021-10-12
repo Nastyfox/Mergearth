@@ -21,7 +21,7 @@ public class DialogManager : MonoBehaviour
     private bool dialogStarted;
 
     //Variables for controls
-    private PlayerActions controls;
+    [SerializeField] private InputReader inputReader = default;
     private bool launchNextSentence;
     #endregion
 
@@ -34,22 +34,22 @@ public class DialogManager : MonoBehaviour
         //Set the first sentence and dialog not started
         sentenceNumber = 0;
         dialogStarted = false;
-
-        //Get all controls
-        controls = new PlayerActions();
-
-        //Controls for dialog
-        controls.UIControl.Dialog.performed += ctx => TriggerDialog();
     }
 
     private void OnEnable()
     {
-        controls.Enable();
+        //Add listeners for player controls events invoked by inputreader
+
+        //Trigger the dialog
+        inputReader.dialogEvent += TriggerDialog;
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        //Remove listeners for player controls events invoked by inputreader
+
+        //Trigger the dialog
+        inputReader.dialogEvent -= TriggerDialog;
     }
 
     // Update is called once per frame
@@ -99,8 +99,8 @@ public class DialogManager : MonoBehaviour
         //Don't display the next sentence immediatly
         launchNextSentence = false;
 
-        //Dialog is started
-        StartCoroutine(DialogStarted());
+        //Activate UI Controls only
+        inputReader.EnableUIControlInput();
     }
 
     public void NextSentence()
@@ -129,8 +129,8 @@ public class DialogManager : MonoBehaviour
         //If it's not a shop, end dialog and make the player play again
         if (!dialog.isShop)
         {
-            //Reactivate player movement
-            PlayerMovement.SharedInstance.ActivatePlayerInteractions();
+            //Activate player controls only
+            inputReader.EnablePlayerControlInput();
         }
         //If it's a shop and it has not been opened yet, show shop panel and instantiate items inside
         else if(!ShopManager.SharedInstance.GetShopHasBeenOpenened() && dialog.isShop)

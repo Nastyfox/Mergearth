@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TMP_Text usedItemText;
 
     //Variables for controls
-    private PlayerActions controls;
+    [SerializeField] private InputReader inputReader = default;
     private bool inventoryInputTriggered;
     #endregion
 
@@ -39,22 +39,28 @@ public class Inventory : MonoBehaviour
         //Set variables
         coinCount = 0;
         inventoryItems = new List<ItemSO>();
-
-        //Get all controls
-        controls = new PlayerActions();
-
-        //Open or close inventory based on previous state
-        controls.UIControl.Inventory.performed += ctx => InventoryInputTriggered();
     }
 
     private void OnEnable()
     {
-        controls.Enable();
+        //Add listeners for player controls events invoked by inputreader
+
+        //Open inventory
+        inputReader.inventoryEvent += InventoryInputTriggered;
+
+        //Close inventory
+        inputReader.closeInventoryEvent += InventoryInputTriggered;
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        //Remove listeners for player controls events invoked by inputreader
+
+        //Open inventory
+        inputReader.inventoryEvent -= InventoryInputTriggered;
+
+        //Close inventory
+        inputReader.closeInventoryEvent -= InventoryInputTriggered;
     }
 
     private void Start()
@@ -74,16 +80,20 @@ public class Inventory : MonoBehaviour
             if (!inventoryIsOpen)
             {
                 //Pause game and open inventory
-                PlayerMovement.SharedInstance.DeactivatePlayerInteractions();
                 inventoryPanel.SetActive(true);
                 inventoryIsOpen = true;
+
+                //Enable UI controls only
+                inputReader.EnableUIControlInput();
             }
             else
             {
                 //Unpause game and close inventory
-                PlayerMovement.SharedInstance.ActivatePlayerInteractions();
                 inventoryPanel.SetActive(false);
                 inventoryIsOpen = false;
+
+                //Enable player controls only
+                inputReader.EnablePlayerControlInput();
             }
             inventoryInputTriggered = false;
         }

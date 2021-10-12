@@ -17,11 +17,12 @@ public class ShopManager : MonoBehaviour
     //Variables for shop UI
     [SerializeField] private GameObject itemsContainer;
     [SerializeField] private TMP_Text buyItemText;
-
-    //Variables for shop UI
     [SerializeField] private GameObject shopPanel;
     private bool isShopOpen;
     private bool shopHasBeenOpened;
+
+    //Variables for controls
+    [SerializeField] private InputReader inputReader = default;
     #endregion
 
     #region UnityMethods
@@ -119,8 +120,8 @@ public class ShopManager : MonoBehaviour
         shopPanel.SetActive(false);
         isShopOpen = false;
 
-        //Reactivate player movement
-        PlayerMovement.SharedInstance.ActivatePlayerInteractions();
+        //Activate player controls only
+        inputReader.EnablePlayerControlInput();
     }
 
     public void OpenShop()

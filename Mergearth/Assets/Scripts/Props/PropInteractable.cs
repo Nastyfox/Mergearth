@@ -19,9 +19,6 @@ public class PropInteractable : MonoBehaviour
     //Variables for NPC talking
     private bool NPCInRange;
     private DialogSO dialogSO;
-
-    //Variables for Player interaction
-    private PlayerActions controls;
     #endregion
 
     #region UnityMethods

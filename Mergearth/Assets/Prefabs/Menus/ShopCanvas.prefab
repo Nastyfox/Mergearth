@@ -356,6 +356,7 @@ MonoBehaviour:
   itemsContainer: {fileID: 2409535154291060221}
   buyItemText: {fileID: 7273766259118103036}
   shopPanel: {fileID: 7999580980962324505}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}
 --- !u!1 &2752227241021607181
 GameObject:
   m_ObjectHideFlags: 0

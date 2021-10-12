@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isInteracting;
 
     //Variables for controls
-    private PlayerActions controls;
+    [SerializeField] private InputReader inputReader = default;
 
     //Variables for collider
     [SerializeField] private BoxCollider2D playerBC;
@@ -48,20 +48,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //Get the instance for player movement
         SharedInstance = this;
-
-        //Get all controls
-        controls = new PlayerActions();
-        
-        //Move or stop movement based on input value
-        controls.PlayerControl.Move.performed += ctx => OnMovement(ctx);
-        controls.PlayerControl.Move.canceled += ctx => StopMovement();
-
-        //Make a small or big jump when input is pressed
-        controls.PlayerControl.Jump.started += ctx => OnJump();
-        controls.PlayerControl.Jump.canceled += ctx => StopJump();
-
-        //Set interactions with props
-        controls.PlayerControl.Interact.performed += ctx => OnInteract();
     }
 
     // Update is called once per frame
@@ -115,11 +101,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        controls.PlayerControl.Enable();
+        //Add listeners for player controls events invoked by inputreader
+
+        //Move based on input value
+        inputReader.moveEvent += OnMovement;
+
+        //Make a small or big jump when input is pressed
+        inputReader.jumpEvent += OnJump;
+        inputReader.jumpCanceledEvent += StopJump;
+
+        //Set interactions with props
+        inputReader.interactEvent += OnInteract;
     }
     private void OnDisable()
     {
-        controls.PlayerControl.Disable();
+        //Remove listeners for player controls events invoked by inputreader
+
+        //Move based on input value
+        inputReader.moveEvent -= OnMovement;
+
+        //Make a small or big jump when input is pressed
+        inputReader.jumpEvent -= OnJump;
+        inputReader.jumpCanceledEvent -= StopJump;
+
+        //Set interactions with props
+        inputReader.interactEvent -= OnInteract;
     }
     #endregion
 
@@ -172,6 +178,9 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRb.AddForce(new Vector2(0.0f, PlayerStats.SharedInstance.GetPlayerJumpForce()));
         }
+
+        horizontalMovement = 0;
+        verticalMovement = 0;
     }
     private void SetPlayerMiddleLadder()
     {
@@ -266,22 +275,13 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region InputMethods
-    public void OnMovement(InputAction.CallbackContext value)
+    public void OnMovement(Vector2 movement)
     {
-        Vector2 rawInputMovement = value.ReadValue<Vector2>();
-
         //Get horizontal movement based on input
-        horizontalMovement = rawInputMovement.x * PlayerStats.SharedInstance.GetPlayerMoveSpeed();
+        horizontalMovement = movement.x * PlayerStats.SharedInstance.GetPlayerMoveSpeed();
 
         //Get vertical movement based on input
-        verticalMovement = rawInputMovement.y * PlayerStats.SharedInstance.GetPlayerClimbSpeed();
-    }
-
-    private void StopMovement()
-    {
-        //Stop all movements
-        horizontalMovement = 0;
-        verticalMovement = 0;
+        verticalMovement = movement.y * PlayerStats.SharedInstance.GetPlayerClimbSpeed();
     }
 
     private void OnJump()

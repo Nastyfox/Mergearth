@@ -41,6 +41,22 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a4cf04a-8016-4a1d-bea6-ea9047add6cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""79fa31ad-2195-44f6-a78e-4da233360b1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -307,6 +323,50 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7e010cc-0e85-45bd-85cf-8cc08e2b323b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9295ba81-6b70-469f-bdd6-6a350b4822b6"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f1da3df-aeaf-42c1-badc-4e13e7432f4c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7bae271-aa68-4966-a0be-10277e1cd71d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -315,25 +375,9 @@ public class @PlayerActions : IInputActionCollection, IDisposable
             ""id"": ""7f946fde-9042-4129-9df0-7a92edd7bb3a"",
             ""actions"": [
                 {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""47c537a3-a944-4fb0-9b3f-3a662aded7bd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Dialog"",
                     ""type"": ""Button"",
                     ""id"": ""006f6675-d75d-4bac-8da4-1c026a7b0fa7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Inventory"",
-                    ""type"": ""Button"",
-                    ""id"": ""a490c298-93a6-417f-b9ce-090f25af83b4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -345,53 +389,25 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Unpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4bc20439-4818-4077-bff0-5e9b9df1a587"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""CloseInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc8a37a6-23e3-41a4-9b24-8342b31ed48d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""c2b6a072-7ccf-406a-9b71-662c09ec54f6"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""53e5c83f-d61f-4538-a562-a83be54b2053"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f1099bf3-6889-43d0-87cd-d23a6cccc0e4"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d91ebb2f-5eb8-4fd0-8217-45a0d8faeb55"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""0ba0f4bc-d992-4464-badb-7a1b7ba8ff3f"",
@@ -409,7 +425,7 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Credits"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -435,6 +451,50 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                     ""action"": ""Dialog"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14269cb6-732e-4c63-8ed0-438a00305426"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38e31bee-2ba0-433e-be29-66f068986bb0"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b8679db-4556-4c11-8459-653d0e834c08"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""CloseInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3c4a13c-bc42-451b-a7fa-5cc124de5f72"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CloseInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -457,12 +517,14 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         m_PlayerControl_Move = m_PlayerControl.FindAction("Move", throwIfNotFound: true);
         m_PlayerControl_Jump = m_PlayerControl.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControl_Interact = m_PlayerControl.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerControl_Pause = m_PlayerControl.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerControl_Inventory = m_PlayerControl.FindAction("Inventory", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
-        m_UIControl_Pause = m_UIControl.FindAction("Pause", throwIfNotFound: true);
         m_UIControl_Dialog = m_UIControl.FindAction("Dialog", throwIfNotFound: true);
-        m_UIControl_Inventory = m_UIControl.FindAction("Inventory", throwIfNotFound: true);
         m_UIControl_Credits = m_UIControl.FindAction("Credits", throwIfNotFound: true);
+        m_UIControl_Unpause = m_UIControl.FindAction("Unpause", throwIfNotFound: true);
+        m_UIControl_CloseInventory = m_UIControl.FindAction("CloseInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -515,6 +577,8 @@ public class @PlayerActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControl_Move;
     private readonly InputAction m_PlayerControl_Jump;
     private readonly InputAction m_PlayerControl_Interact;
+    private readonly InputAction m_PlayerControl_Pause;
+    private readonly InputAction m_PlayerControl_Inventory;
     public struct PlayerControlActions
     {
         private @PlayerActions m_Wrapper;
@@ -522,6 +586,8 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerControl_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerControl_Jump;
         public InputAction @Interact => m_Wrapper.m_PlayerControl_Interact;
+        public InputAction @Pause => m_Wrapper.m_PlayerControl_Pause;
+        public InputAction @Inventory => m_Wrapper.m_PlayerControl_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -540,6 +606,12 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnInteract;
+                @Pause.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnPause;
+                @Inventory.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -553,6 +625,12 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -561,18 +639,18 @@ public class @PlayerActions : IInputActionCollection, IDisposable
     // UIControl
     private readonly InputActionMap m_UIControl;
     private IUIControlActions m_UIControlActionsCallbackInterface;
-    private readonly InputAction m_UIControl_Pause;
     private readonly InputAction m_UIControl_Dialog;
-    private readonly InputAction m_UIControl_Inventory;
     private readonly InputAction m_UIControl_Credits;
+    private readonly InputAction m_UIControl_Unpause;
+    private readonly InputAction m_UIControl_CloseInventory;
     public struct UIControlActions
     {
         private @PlayerActions m_Wrapper;
         public UIControlActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pause => m_Wrapper.m_UIControl_Pause;
         public InputAction @Dialog => m_Wrapper.m_UIControl_Dialog;
-        public InputAction @Inventory => m_Wrapper.m_UIControl_Inventory;
         public InputAction @Credits => m_Wrapper.m_UIControl_Credits;
+        public InputAction @Unpause => m_Wrapper.m_UIControl_Unpause;
+        public InputAction @CloseInventory => m_Wrapper.m_UIControl_CloseInventory;
         public InputActionMap Get() { return m_Wrapper.m_UIControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -582,34 +660,34 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_UIControlActionsCallbackInterface != null)
             {
-                @Pause.started -= m_Wrapper.m_UIControlActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_UIControlActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_UIControlActionsCallbackInterface.OnPause;
                 @Dialog.started -= m_Wrapper.m_UIControlActionsCallbackInterface.OnDialog;
                 @Dialog.performed -= m_Wrapper.m_UIControlActionsCallbackInterface.OnDialog;
                 @Dialog.canceled -= m_Wrapper.m_UIControlActionsCallbackInterface.OnDialog;
-                @Inventory.started -= m_Wrapper.m_UIControlActionsCallbackInterface.OnInventory;
-                @Inventory.performed -= m_Wrapper.m_UIControlActionsCallbackInterface.OnInventory;
-                @Inventory.canceled -= m_Wrapper.m_UIControlActionsCallbackInterface.OnInventory;
                 @Credits.started -= m_Wrapper.m_UIControlActionsCallbackInterface.OnCredits;
                 @Credits.performed -= m_Wrapper.m_UIControlActionsCallbackInterface.OnCredits;
                 @Credits.canceled -= m_Wrapper.m_UIControlActionsCallbackInterface.OnCredits;
+                @Unpause.started -= m_Wrapper.m_UIControlActionsCallbackInterface.OnUnpause;
+                @Unpause.performed -= m_Wrapper.m_UIControlActionsCallbackInterface.OnUnpause;
+                @Unpause.canceled -= m_Wrapper.m_UIControlActionsCallbackInterface.OnUnpause;
+                @CloseInventory.started -= m_Wrapper.m_UIControlActionsCallbackInterface.OnCloseInventory;
+                @CloseInventory.performed -= m_Wrapper.m_UIControlActionsCallbackInterface.OnCloseInventory;
+                @CloseInventory.canceled -= m_Wrapper.m_UIControlActionsCallbackInterface.OnCloseInventory;
             }
             m_Wrapper.m_UIControlActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
                 @Dialog.started += instance.OnDialog;
                 @Dialog.performed += instance.OnDialog;
                 @Dialog.canceled += instance.OnDialog;
-                @Inventory.started += instance.OnInventory;
-                @Inventory.performed += instance.OnInventory;
-                @Inventory.canceled += instance.OnInventory;
                 @Credits.started += instance.OnCredits;
                 @Credits.performed += instance.OnCredits;
                 @Credits.canceled += instance.OnCredits;
+                @Unpause.started += instance.OnUnpause;
+                @Unpause.performed += instance.OnUnpause;
+                @Unpause.canceled += instance.OnUnpause;
+                @CloseInventory.started += instance.OnCloseInventory;
+                @CloseInventory.performed += instance.OnCloseInventory;
+                @CloseInventory.canceled += instance.OnCloseInventory;
             }
         }
     }
@@ -637,12 +715,14 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
     {
-        void OnPause(InputAction.CallbackContext context);
         void OnDialog(InputAction.CallbackContext context);
-        void OnInventory(InputAction.CallbackContext context);
         void OnCredits(InputAction.CallbackContext context);
+        void OnUnpause(InputAction.CallbackContext context);
+        void OnCloseInventory(InputAction.CallbackContext context);
     }
 }

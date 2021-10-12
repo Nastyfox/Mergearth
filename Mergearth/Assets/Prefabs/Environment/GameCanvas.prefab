@@ -403,7 +403,7 @@ MonoBehaviour:
   NPCName: {fileID: 5042375226333433391}
   NPCSentence: {fileID: 1472803763461760454}
   dialogAnimator: {fileID: 4671108447005695017}
-  shopPanel: {fileID: 0}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}
 --- !u!1 &240620353722427696
 GameObject:
   m_ObjectHideFlags: 0

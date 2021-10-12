@@ -405,8 +405,8 @@ MonoBehaviour:
   coinCountText: {fileID: 2431526490547187972}
   prefabItemButton: {fileID: 8161584568526663392, guid: 75d77f4b4e3ba724baafaaa2bd925ab8, type: 3}
   itemsContainer: {fileID: 2569858540000953045}
-  usedItemTextGO: {fileID: 541107518596331872}
   usedItemText: {fileID: 3526728119643871287}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}
 --- !u!1 &4761204860388672777
 GameObject:
   m_ObjectHideFlags: 0

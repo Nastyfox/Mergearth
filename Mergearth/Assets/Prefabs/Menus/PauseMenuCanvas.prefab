@@ -543,6 +543,7 @@ MonoBehaviour:
   pauseFirstButton: {fileID: 391381152828964446}
   settingsFirstButton: {fileID: 837979843715498560}
   closedSettingsFirstButton: {fileID: 391381153694637738}
+  inputReader: {fileID: 11400000, guid: 63ba249729f0669409804bfc1c7097ff, type: 2}
 --- !u!1 &391381153590816665
 GameObject:
   m_ObjectHideFlags: 0

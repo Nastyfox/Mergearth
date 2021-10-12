@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject pauseFirstButton, settingsFirstButton, closedSettingsFirstButton;
 
     //Variables for controls
-    private PlayerActions controls;
+    [SerializeField] private InputReader inputReader = default;
     private bool pauseInputTriggered;
     #endregion
 
@@ -62,21 +62,27 @@ public class PauseMenu : MonoBehaviour
 
         //Close other panels at start
         CloseSettingsPanel();
-
-        //Get all controls
-        controls = new PlayerActions();
-
-        //Open or close pause menu based on previous state
-        controls.UIControl.Pause.performed += ctx => PauseInputTriggered();
     }
     private void OnEnable()
     {
-        controls.Enable();
+        //Add listeners for player controls events invoked by inputreader
+
+        //Launch pause
+        inputReader.pauseEvent += PauseInputTriggered;
+
+        //Resume game
+        inputReader.unpauseEvent += PauseInputTriggered;
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        //Remove listeners for player controls events invoked by inputreader
+
+        //Launch pause
+        inputReader.pauseEvent -= PauseInputTriggered;
+
+        //Resume game
+        inputReader.unpauseEvent -= PauseInputTriggered;
     }
     #endregion
 
@@ -93,8 +99,10 @@ public class PauseMenu : MonoBehaviour
         //Activate UI
         pauseUI.SetActive(true);
 
-        //Stop every movement and stop time
-        PlayerMovement.SharedInstance.enabled = false;
+        //Enable UI controls only
+        inputReader.EnableUIControlInput();
+
+        //Stop time
         Time.timeScale = Constants.STOPPEDTIMESCALE;
 
         //Pause the music
@@ -106,8 +114,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        //Stop every movement and stop time
-        PlayerMovement.SharedInstance.enabled = true;
+        //Enable player controls only
+        inputReader.EnablePlayerControlInput();
+
+        //Resume time
         Time.timeScale = Constants.NORMALTIMESCALE;
 
         //Resume the music
