@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e1e13a5221390c4b9eea21a9ba048de, type: 3}
+  m_Script: {fileID: 11500000, guid: f7d8e2fddbec024498cc4442fd2a1ede, type: 3}
   m_Name: HealPotion
   m_EditorClassIdentifier: 
+  soundEffect: {fileID: 0}
   item:
     itemID: 0
-    itemName: HEALTH POTION
-    itemDescription: POTION THAT HEALS 20 HP
-    itemSpriteName: HealthPotion
-    healValue: 20
-    speedPercentage: 0
-    speedDuration: 0
-    itemPrice: 5
+    itemName: HEAL POTION
+    itemDescription: 
+    itemSpriteName: HealPotion
+    itemPrice: 3
+  healValue: 20

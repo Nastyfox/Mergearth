@@ -145,13 +145,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //Put player in the middle of the ladder
+            SetPlayerMiddleLadder();
+
             //Create target velocity and add it to the player for horizontal movement
             Vector3 targetVerticalVelocity = new Vector3(0, verticalMovement, 0);
             playerRb.velocity = Vector3.SmoothDamp(playerRb.velocity, targetVerticalVelocity, ref velocity, smoothTime);
             playerRb.gravityScale = 0;
-
-            //Put player in the middle of the ladder
-            SetPlayerMiddleLadder();
         }
 
         //Add force for the jump

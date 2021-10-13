@@ -1,8 +1,7 @@
 using System;
-using UnityEngine;
+using System.Collections;
 
-[CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/ItemSO", order = 2)]
-public class ItemSO : PickupSO
+public abstract class ItemSO : PickupSO
 {
     #region Variables
     public Item item;
@@ -12,6 +11,8 @@ public class ItemSO : PickupSO
     {
         Inventory.SharedInstance.AddItem(this);
     }
+
+    public abstract IEnumerator UseItem();
 }
 
 [Serializable]
@@ -22,9 +23,6 @@ public class Item
     public string itemName;
     public string itemDescription;
     public string itemSpriteName;
-    public int healValue;
-    public float speedPercentage;
-    public int speedDuration;
     public int itemPrice;
     #endregion
 }

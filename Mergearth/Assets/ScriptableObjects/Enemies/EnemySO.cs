@@ -1,12 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObjects/EnemySO", order = 2)]
-public class EnemySO : ScriptableObject
+public abstract class EnemySO : ScriptableObject
 {
-
 	#region Variables
 	public int enemyId;
-	public int enemyHP;
+	public int maxHP;
 	public int enemyDamage;
+	public bool isFlying;
+	public float speed;
+	public float nextWaypointDistance;
+	public float activationDistance;
+	public float jumpNodeHeightRequirement;
+	public float jumpModifier;
+	public float jumpCheckOffset;
 	#endregion
 }

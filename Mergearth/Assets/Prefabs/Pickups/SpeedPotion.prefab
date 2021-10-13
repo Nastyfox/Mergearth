@@ -122,4 +122,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d4a2878f7c3a145a8e485417c4b842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSO: {fileID: 11400000, guid: d5a3c2e61d9385c45baf51bc941a82e7, type: 2}
+  pickupSO: {fileID: 11400000, guid: adb26cb02e7ed51468ac6ae060fdd4a3, type: 2}

@@ -24,10 +24,14 @@ public class Inventory : MonoBehaviour
     private GameObject inventoryPanel;
     [SerializeField] private GameObject itemsContainer;
     [SerializeField] private TMP_Text usedItemText;
+    private List<GameObject> inventoryButtons;
 
     //Variables for controls
     [SerializeField] private InputReaderSO inputReader = default;
     private bool inventoryInputTriggered;
+
+    //Variables for navigation between buttons
+    private GameObject inventoryFirstButton;
     #endregion
 
     #region UnityMethods
@@ -39,6 +43,7 @@ public class Inventory : MonoBehaviour
         //Set variables
         coinCount = 0;
         inventoryItems = new List<ItemSO>();
+        inventoryButtons = new List<GameObject>();
     }
 
     private void OnEnable()
@@ -74,8 +79,12 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
+        //If there are items in the inventory, select the first one before opening the panel
+        if(inventoryButtons.Count > 0)
+            inventoryFirstButton = inventoryButtons[0];
+
         //If the player pressed the inventory input
-        if(inventoryInputTriggered)
+        if (inventoryInputTriggered)
         {
             if (!inventoryIsOpen)
             {
@@ -85,6 +94,9 @@ public class Inventory : MonoBehaviour
 
                 //Enable UI controls only
                 inputReader.EnableUIControlInput();
+
+                //Select the first item
+                SettingsMenu.SharedInstance.EventSystemSelectedElement(inventoryFirstButton);
             }
             else
             {
@@ -143,20 +155,23 @@ public class Inventory : MonoBehaviour
         //Set current item to use it
         currentItemSO = itemSO;
 
-        //Increase player speed if necessary
-        StartCoroutine(IncreasePlayerSpeed());
-
-        //Heal player if necessary
-        PlayerHealth.SharedInstance.Heal(currentItemSO.item.healValue);
+        //Use item
+        StartCoroutine(currentItemSO.UseItem());
 
         //Display item used
-        StartCoroutine(DisplayUsedItem(itemSO.item.itemName));
+        StartCoroutine(DisplayUsedItem(currentItemSO.item.itemName));
+
+        //Remove item from the list
+        inventoryItems.Remove(currentItemSO);
+        inventoryButtons.Remove(itemButton);
+
+        //After using an item, go back to the first one
+        inventoryFirstButton = inventoryButtons[0];
+        //Select the first item
+        SettingsMenu.SharedInstance.EventSystemSelectedElement(inventoryFirstButton);
 
         //Destroy the button
         Destroy(itemButton);
-
-        //Remove item from the list
-        inventoryItems.Remove(itemSO);
     }
 
     public void AddItem(ItemSO itemSO)
@@ -173,26 +188,14 @@ public class Inventory : MonoBehaviour
         string spriteLocation = "Images/" + itemSO.item.itemSpriteName;
         itemButton.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(spriteLocation);
 
-        //If it's the first item, set it as selected
-        if(inventoryItems.Count == 0)
-        {
-            SettingsMenu.SharedInstance.EventSystemSelectedElement(itemButton);
-        }
+        //Add the button to the list of buttons
+        inventoryButtons.Add(itemButton);
         //Add item to the list
         inventoryItems.Add(itemSO);
     }
     #endregion
 
     #region IEnumerators
-    private IEnumerator IncreasePlayerSpeed()
-    {
-        //Increase player's speed for a certain amount of time
-        PlayerMovement.SharedInstance.IncreaseSpeedByPercentage(currentItemSO.item.speedPercentage);
-        yield return new WaitForSeconds(currentItemSO.item.speedDuration);
-        //Decrease player's speed after a certain amount of time
-        PlayerMovement.SharedInstance.DecreaseSpeedByPercentage(currentItemSO.item.speedPercentage);
-    }
-
     private IEnumerator DisplayUsedItem(string name)
     {
         usedItemText.text = name + " USED";

@@ -9,9 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e41823eb5ea834a47b6863bc584ba8ef, type: 3}
+  m_Script: {fileID: 11500000, guid: a11cb1f20aa5be94cbfbee8fce438809, type: 3}
   m_Name: Snake
   m_EditorClassIdentifier: 
   enemyId: 0
-  enemyHP: 20
-  enemyDamage: 5
+  maxHP: 20
+  enemyDamage: 10
+  isFlying: 0
+  speed: 500
+  nextWaypointDistance: 0.5
+  activationDistance: 15
+  jumpNodeHeightRequirement: 0.8
+  jumpModifier: 0.3
+  jumpCheckOffset: 0.1
