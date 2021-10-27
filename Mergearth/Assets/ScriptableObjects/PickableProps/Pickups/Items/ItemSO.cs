@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-public abstract class ItemSO : PickupSO
+public class ItemSO : PickupSO
 {
     #region Variables
     public Item item;
@@ -12,7 +12,10 @@ public abstract class ItemSO : PickupSO
         Inventory.SharedInstance.AddItem(this);
     }
 
-    public abstract IEnumerator UseItem();
+    public virtual IEnumerator UseItem()
+    {
+        yield return null;
+    }
 }
 
 [Serializable]

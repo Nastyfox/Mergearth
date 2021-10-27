@@ -21,9 +21,6 @@ public class MainMenu : MonoBehaviour
     {
         //Get the instance for settings menu
         SharedInstance = this;
-
-        //Load datas from file for loading levels
-        LoadAndSaveData.SharedInstance.LoadMenuDatas();
     }
 
     private void Start()

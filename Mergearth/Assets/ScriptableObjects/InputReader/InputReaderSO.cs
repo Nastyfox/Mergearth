@@ -22,6 +22,7 @@ public class InputReaderSO : ScriptableObject, PlayerActions.IPlayerControlActio
     public event UnityAction closeInventoryEvent;
 
     private PlayerActions playerActions;
+    private InputActionMap previousActionMap;
     #endregion
 
     #region UnityMethods
@@ -43,8 +44,24 @@ public class InputReaderSO : ScriptableObject, PlayerActions.IPlayerControlActio
     }
     #endregion
 
+    #region Getters & Setters
+    public InputActionMap GetPreviousActionMap()
+    {
+        return previousActionMap;
+    }
+    #endregion
 
     #region Methods
+    public void SaveActionMap()
+    {
+        previousActionMap = playerActions.GetActiveMap();
+    }
+
+    public void SwitchActionMap(InputActionMap map)
+    {
+        DisableAllInput();
+        map.Enable();
+    }
     public void EnablePlayerControlInput()
     {
         playerActions.PlayerControl.Enable();

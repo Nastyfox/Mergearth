@@ -63,7 +63,7 @@ public class ShopManager : MonoBehaviour
         for(int i = 0; i < itemsNumber; i++)
         {
             //Add a random item based on possible ones
-            int itemType = Random.Range(0, possibleItems.Length);
+            int itemType = Random.Range(0, possibleItems.Length - 1);
             AddItem(possibleItems[itemType], i);
         }
     }

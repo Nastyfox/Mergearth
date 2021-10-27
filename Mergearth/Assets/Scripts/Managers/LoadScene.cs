@@ -85,8 +85,12 @@ public class LoadScene : MonoBehaviour
     #region IEnumerators
     public IEnumerator LoadSceneByName(string sceneName, int levelNumber, bool fadeAnimation, bool loadData)
     {
+
         //Saving datas for next level
-        sceneToSaveName = sceneName;
+        if (sceneName != "Credits")
+            sceneToSaveName = sceneName;
+        else
+            SaveCurrentScene();
         levelUnlocked = levelNumber;
         LoadAndSaveData.SharedInstance.GetDatasToSave();
 

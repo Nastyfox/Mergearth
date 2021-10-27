@@ -36,13 +36,11 @@ public class PauseMenu : MonoBehaviour
             {
                 //Activate pause UI
                 PauseGame();
-                gameIsPaused = true;
             }
             else
             {
                 //Deactivate pause UI
                 ResumeGame();
-                gameIsPaused = false;
             }
 
             pauseInputTriggered = false;
@@ -96,6 +94,11 @@ public class PauseMenu : MonoBehaviour
     #region Methods
     public void PauseGame()
     {
+        gameIsPaused = true;
+
+        //Save current action map before pausing the game
+        inputReader.SaveActionMap();
+
         //Activate UI
         pauseUI.SetActive(true);
 
@@ -114,8 +117,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        //Enable player controls only
-        inputReader.EnablePlayerControlInput();
+        gameIsPaused = false;
+
+        //Enable actions based on previous state
+        inputReader.SwitchActionMap(inputReader.GetPreviousActionMap());
 
         //Resume time
         Time.timeScale = Constants.NORMALTIMESCALE;

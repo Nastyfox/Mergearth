@@ -725,4 +725,10 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         void OnUnpause(InputAction.CallbackContext context);
         void OnCloseInventory(InputAction.CallbackContext context);
     }
+
+    public InputActionMap GetActiveMap()
+    {
+        if (m_UIControl.enabled) return m_UIControl;
+        else return m_PlayerControl;
+    }
 }

@@ -28,6 +28,9 @@ public class LoadAndSaveData : MonoBehaviour
         //Set variables
         inventoryItems = new List<ItemSO>();
         itemsList = new List<Item>();
+
+        //Load Menu Datas when the main menu is on
+        LoadMenuDatas();
     }
     #endregion
 

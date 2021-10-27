@@ -56,15 +56,10 @@ public class DialogManager : MonoBehaviour
     private void Update()
     {
         //If player press input, go to the next sentence
-        if (dialogStarted && launchNextSentence && !ShopManager.SharedInstance.GetIsShopOpen())
+        if (dialogStarted && launchNextSentence)
         {
             NextSentence();
             launchNextSentence = false;
-        }
-        //If player press input and shop is open, close it
-        else if(launchNextSentence && ShopManager.SharedInstance.GetIsShopOpen())
-        {
-            ShopManager.SharedInstance.CloseShop();
         }
     }
     #endregion
@@ -79,6 +74,8 @@ public class DialogManager : MonoBehaviour
     #region Methods
     public void StartDialog(DialogSO dialogSO)
     {
+        sentenceNumber = 0;
+
         //Store dialogSO
         this.dialog = dialogSO;
 
@@ -118,7 +115,27 @@ public class DialogManager : MonoBehaviour
         //End dialog if it was the last sentence
         else
         {
-            StartCoroutine(EndDialog());
+            //Close dialog UI
+            dialogAnimator.SetBool("isOpen", false);
+
+            //If it's a shop and it's not open
+            if (dialog.isShop && !ShopManager.SharedInstance.GetIsShopOpen())
+            {
+                //If it's a shop and it has not been opened yet, show shop panel and instantiate items inside
+                if (!ShopManager.SharedInstance.GetShopHasBeenOpenened())
+                {
+                    //Add items in the shop
+                    ShopManager.SharedInstance.AddItemsInShop();
+                }
+                //If it's a shop and it has been opened yet, show shop panel
+                else
+                {
+                    //Show shop panel
+                    ShopManager.SharedInstance.OpenShop();
+                }
+            }
+            else
+                StartCoroutine(EndDialog());
         }
     }
     #endregion
@@ -126,26 +143,16 @@ public class DialogManager : MonoBehaviour
     #region IEnumerators
     private IEnumerator EndDialog()
     {
-        //Close dialog UI
-        dialogAnimator.SetBool("isOpen", false);
-
         //If it's not a shop, end dialog and make the player play again
         if (!dialog.isShop)
         {
             //Activate player controls only
             inputReader.EnablePlayerControlInput();
         }
-        //If it's a shop and it has not been opened yet, show shop panel and instantiate items inside
-        else if(!ShopManager.SharedInstance.GetShopHasBeenOpenened() && dialog.isShop)
+        //If the shop is open, close it
+        else if(dialog.isShop)
         {
-            //Add items in the shop
-            ShopManager.SharedInstance.AddItemsInShop();
-        }
-        //If it's a shop and it has been opened yet, show shop panel
-        else if (ShopManager.SharedInstance.GetShopHasBeenOpenened() && dialog.isShop)
-        {
-            //Show shop panel
-            ShopManager.SharedInstance.OpenShop();
+            ShopManager.SharedInstance.CloseShop();
         }
 
         //Wait 1 second before possibility to start another dialog

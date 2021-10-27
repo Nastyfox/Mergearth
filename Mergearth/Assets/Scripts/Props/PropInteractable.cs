@@ -38,10 +38,10 @@ public class PropInteractable : MonoBehaviour
                     interactableSO.Interact();
                     interactionDone = true;
                 }
-
-                //Interaction is finished
-                isInteracting = false;
             }
+
+            //Interaction is finished
+            isInteracting = false;
         }
     }
 
