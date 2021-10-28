@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     private bool closeLadder;
     private bool isClimbing;
     private float ladderCenterX;
+    private Transform ladderTransform;
+    private float ladderSizeX = 0.5f;
 
     //Variables for controls
     [SerializeField] private InputReaderSO inputReader = default;
@@ -50,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(ladderTransform != null)
+        {
+            //Get ladder position
+            ladderCenterX = ladderTransform.position.x + ladderSizeX;
+        }
+
         if (!isJumping)
         {
             //Get player speed based on velocity
@@ -239,8 +247,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Ladders"))
         {
             closeLadder = true;
-            Transform ladderTransform = collision.gameObject.transform;
-            ladderCenterX = ladderTransform.position.x + ladderTransform.gameObject.GetComponent<TilemapRenderer>().bounds.size.x / 2;
+            ladderTransform = collision.gameObject.transform;
         }
     }
 
@@ -251,6 +258,7 @@ public class PlayerMovement : MonoBehaviour
         {
             closeLadder = false;
             isClimbing = false;
+            ladderTransform = null;
         }
     }
     #endregion

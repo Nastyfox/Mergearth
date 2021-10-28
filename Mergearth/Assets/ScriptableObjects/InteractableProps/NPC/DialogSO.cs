@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Dialog", menuName = "ScriptableObjects/DialogSO", order = 1)]
+[CreateAssetMenu(fileName = "Dialog", menuName = "ScriptableObjects/DialogSO")]
 public class DialogSO : InteractableSO
 {
     #region Variables

@@ -309,7 +309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &598161773
 Transform:
   m_ObjectHideFlags: 0
@@ -469,7 +469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1106104485
 Transform:
   m_ObjectHideFlags: 0
@@ -1156,6 +1156,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedPotion
       objectReference: {fileID: 0}
+    - target: {fileID: 2639293457558085187, guid: 19fe8ab068fed944d9eaa2469929db99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639293457558085199, guid: 19fe8ab068fed944d9eaa2469929db99, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -1329,6 +1333,10 @@ PrefabInstance:
     - target: {fileID: 3037385664288748239, guid: 4d083037f312bda49b0519e6ba19e091, type: 3}
       propertyPath: m_Name
       value: Checkpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3037385664288748239, guid: 4d083037f312bda49b0519e6ba19e091, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d083037f312bda49b0519e6ba19e091, type: 3}
@@ -1525,6 +1533,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4349339199109839754, guid: 43c7d72f188b2004a892f15e2f75d864, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43c7d72f188b2004a892f15e2f75d864, type: 3}
 --- !u!1001 &5471207086112787358
@@ -1582,6 +1594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 5471207084366892350, guid: 6fbbba4166da87743a24d0ca9fcd19f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fbbba4166da87743a24d0ca9fcd19f5, type: 3}
 --- !u!1001 &6366449571546888208
@@ -1638,6 +1654,10 @@ PrefabInstance:
     - target: {fileID: 6366449573425277758, guid: a09b6a6a225130447a4b5d8ba5d2959e, type: 3}
       propertyPath: m_Name
       value: Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366449573425277758, guid: a09b6a6a225130447a4b5d8ba5d2959e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09b6a6a225130447a4b5d8ba5d2959e, type: 3}
@@ -1709,6 +1729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest
       objectReference: {fileID: 0}
+    - target: {fileID: 7356693795599467931, guid: 7f0bb3d519a6b4b49a4c3f88379c3230, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7356693795599468005, guid: 7f0bb3d519a6b4b49a4c3f88379c3230, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -1765,6 +1789,10 @@ PrefabInstance:
     - target: {fileID: 7851243456184710361, guid: 617a675409c705843990200488ea91ea, type: 3}
       propertyPath: m_Name
       value: HealPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851243456184710361, guid: 617a675409c705843990200488ea91ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7851243456184710365, guid: 617a675409c705843990200488ea91ea, type: 3}
       propertyPath: m_RootOrder
@@ -1870,6 +1898,10 @@ PrefabInstance:
     - target: {fileID: 8057102731393476827, guid: 0c3ba22ed4997b043b2a211a3868e23c, type: 3}
       propertyPath: m_Name
       value: NPC01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057102731393476827, guid: 0c3ba22ed4997b043b2a211a3868e23c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c3ba22ed4997b043b2a211a3868e23c, type: 3}

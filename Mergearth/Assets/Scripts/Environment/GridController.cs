@@ -4,8 +4,7 @@ public class GridController : MonoBehaviour
 {
 
     #region Variables
-    //Variables for grid movement
-    [SerializeField] private float gridMoveSpeed = 5;
+    [SerializeField] GridSO gridSO;
     #endregion
 
     #region UnityMethods
@@ -20,7 +19,7 @@ public class GridController : MonoBehaviour
     private void MoveGrid()
     {
         //Make grid move left
-        transform.Translate(Vector3.left * Time.deltaTime * gridMoveSpeed);
+        transform.Translate(Vector3.left * Time.deltaTime * gridSO.gridMoveSpeed); ;
     }
     #endregion
 }
