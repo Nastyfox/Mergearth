@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerSpeed;
     private float horizontalMovement;
     private float verticalMovement;
+    [SerializeField] private GridManagerSO gridManagerSO;
 
     //Variables for jump
     private bool isJumping = false;
@@ -47,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
     {
         //Get the instance for player movement
         SharedInstance = this;
+
+        //Set player position before grids apparition
+        float xStartPosition = gridManagerSO.gridSize/2 + 1;
+        this.transform.position = new Vector3(xStartPosition, 0, 0);
     }
 
     // Update is called once per frame
@@ -150,6 +155,15 @@ public class PlayerMovement : MonoBehaviour
             Vector3 targetHorizontalVelocity = new Vector3(horizontalMovement, playerRb.velocity.y, 0);
             playerRb.velocity = Vector3.SmoothDamp(playerRb.velocity, targetHorizontalVelocity, ref velocity, smoothTime);
             playerRb.gravityScale = Constants.GRAVITYSCALE;
+
+            if(this.transform.position.x <= gridManagerSO.xPosLimitLeft)
+            {
+                this.transform.position = new Vector3(gridManagerSO.xPosLimitLeft, this.transform.position.y, this.transform.position.z);
+            }
+            else if(this.transform.position.x >= gridManagerSO.xPosLimitRight)
+            {
+                this.transform.position = new Vector3(gridManagerSO.xPosLimitRight, this.transform.position.y, this.transform.position.z);
+            }
         }
         else
         {

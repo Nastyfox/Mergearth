@@ -11,7 +11,8 @@ public class ObjectPooling : MonoBehaviour
     //Variables for grid patterns creation
     private List<GameObject> pooledGrids;
     [SerializeField] private List<GameObject> possibleGrids;
-    [SerializeField] private int gridAmountToPool;
+    [SerializeField] private GridManagerSO gridManagerSO;
+    private int numberOfGridsPerType;
     #endregion
 
     #region UnityMethods
@@ -29,10 +30,13 @@ public class ObjectPooling : MonoBehaviour
         pooledGrids = new List<GameObject>();
         GameObject tmp;
 
-        foreach(GameObject grid in possibleGrids)
+        //Define the number of grids per type based on maximum grids on screen
+        numberOfGridsPerType = gridManagerSO.maxNumberGrids * gridManagerSO.gridAmountToPool;
+
+        foreach (GameObject grid in possibleGrids)
         {
             //Instantiation of each grid pattern X times
-            for (int i = 0; i < gridAmountToPool; i++)
+            for (int i = 0; i < numberOfGridsPerType; i++)
             {
                 tmp = Instantiate(grid);
                 tmp.SetActive(false);
@@ -53,10 +57,10 @@ public class ObjectPooling : MonoBehaviour
     public GameObject GetGridObject(int gridType)
     {
         //Set position in the list based on grid type to show
-        int gridPositionInList = possibleGrids.Count * gridType - 2;
+        int gridPositionInList = numberOfGridsPerType * (gridType - 1);
 
         //Return first inactive grid object of this type
-        for (int i = gridPositionInList; i < gridPositionInList + gridAmountToPool; i++)
+        for (int i = gridPositionInList; i < gridPositionInList + gridManagerSO.gridAmountToPool; i++)
         {
             if (!pooledGrids[i].activeInHierarchy)
             {
